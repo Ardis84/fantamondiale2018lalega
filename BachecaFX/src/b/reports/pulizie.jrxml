@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pulizie" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="67138e35-4153-4dd7-9ff6-b5caa1786e87">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1"/>
+	<subDataset name="dataset1" uuid="89372cc5-93f9-4ef5-85cb-0aa91575932c"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="beanGenerale" class="net.sf.jasperreports.engine.JREmptyDataSource"/>
+	<parameter name="beanSettimanale" class="java.lang.Object"/>
+	<field name="generali" class="java.lang.Object"/>
+	<field name="settimanali" class="java.lang.Object"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<group name="generali">
+		<groupExpression><![CDATA[$F{generali}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="32">
+				<subreport>
+					<reportElement x="0" y="0" width="535" height="16" uuid="325305bb-9854-47a5-8afb-0e3bb1a49357"/>
+					<dataSourceExpression><![CDATA[$F{settimanali}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pulizie_settimanali.jasper"]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="16" width="535" height="16" uuid="916259f3-2424-4a8e-98fc-4ae4c40e588f"/>
+					<dataSourceExpression><![CDATA[$F{generali}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "pulizie_generali.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="535" height="35" uuid="4d94e49a-54f9-48f0-ad65-95b09309c0bb"/>
+				<imageExpression><![CDATA["b.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="0" width="535" height="35" forecolor="#FFFFFF" uuid="3850d944-195b-4bfe-ae35-2a065fa2f75e"/>
+				<box leftPadding="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tw Cen MT Condensed Extra Bold" size="16" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pulizie Sala Del Regno"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+
+   <fontFamily name="Adam">
+       <normal><![CDATA[fonts/Adam.otf]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+   <fontFamily name="Arial">
+       <normal><![CDATA[fonts/arial.ttf]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+   <fontFamily name="COCOMAT">
+       <normal><![CDATA[fonts/Cocomat Light-trial.ttf]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+   <fontFamily name="GeosansLight">
+       <normal><![CDATA[fonts/GeosansLight.ttf]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+   <fontFamily name="Maximum Impact">
+       <normal><![CDATA[fonts/MaximumImpact.ttf]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+   <fontFamily name="Quicksand Bold">
+       <normal><![CDATA[fonts/Quicksand_Bold.otf]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+   <fontFamily name="Tw Cen MT Condensed Extra Bold">
+       <normal><![CDATA[fonts/TCCEB.TTF]]></normal>
+       <pdfEmbedded><![CDATA[false]]></pdfEmbedded>
+   </fontFamily>
+
+
+</fontFamilies>

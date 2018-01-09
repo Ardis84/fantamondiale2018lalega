@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include source="menubar.fxml" fx:id="menubar" /> 
+      <ComboBox id="tipo" layoutX="442.0" layoutY="139.0" prefHeight="25.0" prefWidth="276.0" />
+      <Label layoutX="321.0" layoutY="139.0" prefHeight="25.0" prefWidth="115.0" text="Tipo di stampa" textAlignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="198.0" prefHeight="25.0" prefWidth="108.0" text="Mese" textAlignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="253.0" prefHeight="25.0" prefWidth="108.0" text="Anno" textAlignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox id="mese" layoutX="442.0" layoutY="191.0" prefHeight="25.0" prefWidth="276.0" />
+      <ComboBox id="anno" layoutX="442.0" layoutY="241.0" prefHeight="25.0" prefWidth="276.0" />
+      <Button id="stampa" layoutX="490.0" layoutY="342.0" mnemonicParsing="false" text="STAMPA" />
+   </children>
+</AnchorPane>

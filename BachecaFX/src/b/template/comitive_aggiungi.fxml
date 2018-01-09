@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include fx:id="menubar" source="menubar.fxml" />
+      <Label layoutX="360.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="Luogo" />
+      <Label layoutX="360.0" layoutY="258.0" prefHeight="17.0" prefWidth="42.0" text="Giorno" />
+      <Label layoutX="360.0" layoutY="289.0" prefHeight="17.0" prefWidth="42.0" text="Ora" />
+      <TextField layoutX="402.0" layoutY="223.0" prefHeight="25.0" prefWidth="240.0" />
+      <ChoiceBox layoutX="402.0" layoutY="254.0" prefHeight="25.0" prefWidth="240.0" />
+      <ChoiceBox layoutX="402.0" layoutY="285.0" prefHeight="25.0" prefWidth="240.0" />
+      <Button layoutX="494.0" layoutY="336.0" mnemonicParsing="false" text="Salva" />
+   </children>
+</AnchorPane>

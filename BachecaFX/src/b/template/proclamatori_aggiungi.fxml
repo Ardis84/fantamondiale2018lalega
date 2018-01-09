@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include source="menubar.fxml" fx:id="menubar" /> 
+      <TableView layoutY="26.0" prefHeight="626.0" prefWidth="1031.0">
+        <columns>
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1031.0" stylesheets="@style/menuStyle.css">
+        <menus>
+          <Menu mnemonicParsing="false" text="Proclamatori" >
+            <items>
+              <MenuItem mnemonicParsing="false" text="Elenco"  />
+              <MenuItem mnemonicParsing="false" text="Aggiungi" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Testimonianza Pubblica">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Stampa" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Comitive">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Elenco" />
+              <MenuItem mnemonicParsing="false" text="Stampa" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Gruppi">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Elenco" />
+              <MenuItem mnemonicParsing="false" text="Stampa" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="?">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Info" />
+            </items>
+          </Menu>
+        </menus>
+</MenuBar>

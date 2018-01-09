@@ -1,0 +1,83 @@
+.menu-bar{
+  /*-fx-background-color: peru;*/
+ /* -fx-border-color:  #f0cd90;*/
+  -fx-background-image:url('');
+ /*-fx-border-width: 2;*/
+ -fx-border-bottom-color: #f0cd90;
+ -fx-border-bottom-width: 1px;
+
+}
+
+.menu-bar .label {
+    -fx-font-size: 12 pt;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.menu-bar .label:hover {
+    -fx-text-fill: white;
+}
+
+.menu-bar .label:focused {
+    -fx-text-fill: white;
+}
+
+.menu-bar .label:showing {
+    -fx-text-fill: white;
+}
+
+.menu:hover {
+    -fx-background-color: #bc784e;
+     color:#fff;
+     -fx-text-fill: #fff;
+}
+
+.menu:focused {
+     -fx-text-fill: #fff;
+}
+
+.menu:showing {
+    -fx-background-color: #bc784e;
+     -fx-text-fill: #fff;
+}
+
+
+.menu-item .label {
+/* -fx-padding: 0em 0.5em 0em 0em;
+-fx-text-fill: -fx-text-base-color;
+*/
+-fx-text-fill: #000;
+/*-fx-background-color:#580e06;*/
+
+}
+
+/*.menu-item:disabled .label {
+-fx-opacity: -fx-disabled-opacity;
+}
+
+.menu-item:focused {
+-fx-background: #a83d1b;
+/*-fx-background-color: #580e06;
+-fx-text-fill: white;
+}
+
+.menu-item:focused .label {
+-fx-text-fill: #000;
+-fx-background-color:#10baeb;
+
+}*/
+.menu-item:focused {
+	 -fx-background-color: #bc784e;
+	 -fx-text-fill: white;
+}
+
+.menu-item .label:hover{
+	-fx-background-color: #bc784e;
+	 -fx-text-fill: white;
+}
+
+.menu-item .label:showing {
+	-fx-background-color: #bc784e;
+	 -fx-text-fill: white;
+}
+
+
