@@ -124,6 +124,11 @@ public class Assegna {
 				if(gg.substring(0, 3).toLowerCase().equals(dayName.substring(0, 3).toLowerCase())  && attivo.equals("1")) {
 					Label l = new Label();
 					l.setText(Utils.reverseDateInString(d)+" - "+dayName+" - "+obj.getString("ora")+" - "+obj.getString("luogo")+" ");
+					
+					Label dateLabel = new Label(Utils.reverseDateInString(d));
+					dateLabel.setMinHeight(20);
+					
+					
 					VBox vb = (VBox)stage.getScene().lookup("#vbox");
 					vb.getChildren().add(l);
 				}				
