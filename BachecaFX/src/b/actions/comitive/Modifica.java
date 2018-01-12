@@ -36,30 +36,50 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class Aggiungi {
+public class Modifica {
 		
 	
 	public static void view(Stage primaryStage) {
 		int c = 0;
 		try {
+			
+			Scene sc = primaryStage.getScene();
+			TableView tb = (TableView)sc.lookup("#elenco");
+			ComitiveElenco ce = (ComitiveElenco)tb.getSelectionModel().getSelectedItem();
+			
 			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/comitive_aggiungi.fxml"));
 			AnchorPane page = (AnchorPane)loader.load();	
 			
-			Scene scene = new Scene(page);			
-			Stage secondStage = new Stage();
-		
 			MenuBar mb = (MenuBar)page.lookup("#menuPrincipal");
 			MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
+			
+			Scene scene = new Scene(page);			
+			Stage secondStage = new Stage();
+			
+			TextField luogo = (TextField) page.lookup("#luogo");
+			luogo.setText(ce.getLuogo());
 			
 			/****/
 			ComboBox sg = (ComboBox) page.lookup("#selGiorno");
 			String[] gg = "Lunedì,Martedì,Mercoledì,Giovedì,Venerdì,Sabato,Domenica".split(",");
+			String ggSel = ce.getGiorno();
+			int intGgSel = 0;
+			for (int i = 0; i < gg.length; i++) {
+				String g = gg[i];
+				if(g.equals(ggSel)) {
+					intGgSel = i;
+					i =  gg.length;
+				}
+			}
 			sg.getItems().addAll(gg);		
+			sg.getSelectionModel().select(intGgSel);
 			/****/
 			ComboBox so = (ComboBox) page.lookup("#selOra");
 			ArrayList<String> ore = new ArrayList<>();			
 			String[] min = {"00","15","30","45"}; 
-			
+			String selOra = ce.getOra();
+			int intSelOra = 0;
+			int cc = 0;
 			for (int j = 0; j < 24; j++) {
 				String h = j+"";
 				if(j<10) {
@@ -67,10 +87,16 @@ public class Aggiungi {
 				}
 				
 				for (int k = 0; k < min.length; k++) {
-					ore.add(h+":"+min[k]);
+					String elH = h+":"+min[k];
+					ore.add(elH);
+					if(elH.equals(selOra)) {
+						intSelOra = cc;
+					}
+					cc++;
 				}
 			}
 			so.getItems().addAll(ore);
+			so.getSelectionModel().select(intSelOra);
 			/****/
 			Button bt = (Button) page.lookup("#salva");
 			EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
@@ -92,9 +118,13 @@ public class Aggiungi {
 					String giorno = sg.getSelectionModel().getSelectedItem().toString();
 					String ora = so.getSelectionModel().getSelectedItem().toString();
 					
-					String qry = "INSERT INTO gp_comitive(luogo, ora, giorno, attivo) "
-							+ "VALUES ('"+luogo.getText()+"','"+ora+"','"+giorno+"',1)";
-					JSONArray r = GePrato.getInsertResponse(qry);
+					String qry = "UPDATE gp_comitive set "
+							+ " luogo='"+luogo.getText()+"',"
+							+ " ora='"+ora+"', "
+							+ " giorno='"+giorno+"', "
+							+ " attivo=1 "
+							+ " where id = "+ce.getId();
+					JSONArray r = GePrato.getUpdateResponse(qry);
 					
 				}
 			};

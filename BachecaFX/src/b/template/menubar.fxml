@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1031.0" stylesheets="@style/menuStyle.css">
+<MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1031.0" stylesheets="@style/menuStyle.css" id="menuPrincipal">
         <menus>
           <Menu mnemonicParsing="false" text="Proclamatori" >
             <items>
@@ -21,6 +21,7 @@
           <Menu mnemonicParsing="false" text="Comitive">
             <items>
               <MenuItem mnemonicParsing="false" text="Elenco" />
+              <MenuItem mnemonicParsing="false" text="Assegna" />
               <MenuItem mnemonicParsing="false" text="Stampa" />
             </items>
           </Menu>

@@ -5,10 +5,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
    <children>
       <fx:include fx:id="menubar" source="menubar.fxml" /> 
-      <TableView layoutY="62.0" prefHeight="590.0" prefWidth="1031.0">
+      <TableView id="elenco" layoutY="62.0" prefHeight="590.0" prefWidth="1031.0">
         <columns>
         </columns>
       </TableView>

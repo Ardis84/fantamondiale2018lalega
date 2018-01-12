@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include fx:id="menubar" source="menubar.fxml" />
+      <ComboBox id="mese" layoutX="320.0" layoutY="39.0" prefWidth="150.0" />
+      <ComboBox id="anno" layoutX="538.0" layoutY="39.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label layoutX="270.0" layoutY="43.0" prefHeight="17.0" prefWidth="41.0" text="Mese" />
+      <Label layoutX="490.0" layoutY="43.0" prefHeight="17.0" prefWidth="41.0" text="Anno" />
+      <Button id="visualizza" layoutX="632.0" layoutY="39.0" mnemonicParsing="false" text="Visualizza" />
+      <VBox id="vbox" layoutX="22.0" layoutY="71.0" prefHeight="570.0" prefWidth="991.0" />
+   </children>
+</AnchorPane>

@@ -5,15 +5,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
    <children>
-      <fx:include fx:id="menubar" source="menubar.fxml" />
-      <Label layoutX="360.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="Luogo" />
-      <Label layoutX="360.0" layoutY="258.0" prefHeight="17.0" prefWidth="42.0" text="Giorno" />
-      <Label layoutX="360.0" layoutY="289.0" prefHeight="17.0" prefWidth="42.0" text="Ora" />
-      <TextField layoutX="402.0" layoutY="223.0" prefHeight="25.0" prefWidth="240.0" />
-      <ChoiceBox layoutX="402.0" layoutY="254.0" prefHeight="25.0" prefWidth="240.0" />
-      <ChoiceBox layoutX="402.0" layoutY="285.0" prefHeight="25.0" prefWidth="240.0" />
-      <Button layoutX="494.0" layoutY="336.0" mnemonicParsing="false" text="Salva" />
+      <Label layoutX="93.0" layoutY="46.0" prefHeight="17.0" prefWidth="42.0" text="Luogo" />
+      <Label layoutX="93.0" layoutY="77.0" prefHeight="17.0" prefWidth="42.0" text="Giorno" />
+      <Label layoutX="93.0" layoutY="108.0" prefHeight="17.0" prefWidth="42.0" text="Ora" />
+      <TextField id="luogo" layoutX="135.0" layoutY="42.0" prefHeight="25.0" prefWidth="240.0" />
+      <Button id="salva" layoutX="227.0" layoutY="161.0" mnemonicParsing="false" text="Salva" />
+      <ComboBox id="selGiorno" layoutX="135.0" layoutY="73.0" prefHeight="25.0" prefWidth="240.0" />
+      <ComboBox id="selOra" layoutX="135.0" layoutY="104.0" prefHeight="25.0" prefWidth="240.0" />
    </children>
 </AnchorPane>

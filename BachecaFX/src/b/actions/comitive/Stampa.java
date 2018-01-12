@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import b.Logs;
+import b.MenuPrincipal;
 import b.Utils;
 import b.printers.Printers;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -26,6 +28,9 @@ public class Stampa {
 			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/testimonianza_pubblica_stampa.fxml"));
 			AnchorPane page = (AnchorPane)loader.load();
 			ObservableList<Node> ch = page.getChildren();
+			
+			MenuBar mb = (MenuBar)page.lookup("#menuPrincipal");
+			MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
 			
 			Scene scene = new Scene(page);
 			

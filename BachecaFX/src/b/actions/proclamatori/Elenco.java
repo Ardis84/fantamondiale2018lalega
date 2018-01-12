@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import b.GePrato;
+import b.MenuPrincipal;
 import b.ObservableListMaker;
 import b.Utils;
 import b.printfoot.Proclamatori;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +29,9 @@ public class Elenco {
 		try {
 			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/proclamatori_elenco.fxml"));
 			AnchorPane page = (AnchorPane)loader.load();	
+			
+			MenuBar mb = (MenuBar)page.lookup("#menuPrincipal");
+			MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
 			
 			ObservableList<Node> ch = page.getChildren();
 			TableView<Proclamatori> tb = (TableView<Proclamatori>)ch.get(1);
