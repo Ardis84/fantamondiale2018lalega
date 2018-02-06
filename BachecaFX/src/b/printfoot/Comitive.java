@@ -2,12 +2,15 @@ package b.printfoot;
 
 import org.json.JSONArray;
 
+import javafx.scene.control.ComboBox;
+
 
 public class Comitive {
 	
 	String settimana;
 	String anno;
 	String mese;
+	String data;
 	String giorno;
 	String ora;
 	String luogo;
@@ -17,10 +20,26 @@ public class Comitive {
 	String offertamese3;
 	String offertamese4;
 
+	ComboBox<String> boxConduttore;
 	
 	
 	
-	
+	public ComboBox<String> getBoxConduttore() {
+		return boxConduttore;
+	}
+
+	public void setBoxConduttore(ComboBox<String> boxConduttore) {
+		this.boxConduttore = boxConduttore;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public String getSettimana() {
 		return settimana;
 	}

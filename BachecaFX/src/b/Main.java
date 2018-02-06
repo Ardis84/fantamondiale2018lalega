@@ -39,43 +39,7 @@ public class Main extends Application {
 		
 		MenuBar mb = (MenuBar)ch.get(0);
 		MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
-		/*ObservableList<Menu> menus = mb.getMenus();
-		for (int i = 0; i < menus.size(); i++) {
-			Menu mi = menus.get(i);
-			String labelMenu = mi.getText();
-			ObservableList<MenuItem> itms = mi.getItems();
-			for (int j = 0; j < itms.size(); j++) {
-				MenuItem itm = itms.get(j);
-				String labelItm = itm.getText();
-				EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
-					
-					@Override
-					public void handle(ActionEvent event) {
-						
-						try {
-							String className = "b.actions."+labelMenu.toLowerCase().replaceAll(" ", "")+"."+labelItm.toUpperCase().replaceAll(" ", "").substring(0, 1)+labelItm.toLowerCase().replaceAll(" ", "").substring(1, labelItm.length());
-							
-							if(labelMenu.equals("?"))
-								className = "b.actions.info.InfoPopUp";
-							
-							Class<?> c = Class.forName(className);
-							Method[] methods = c.getDeclaredMethods();
-							for (int k = 0; k < methods.length; k++) {
-								Method method = methods[k];
-								if(method.getName().equals("view"))
-									method.invoke(c.newInstance(), primaryStage);
-							}							
-							
-						} catch (ClassNotFoundException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
-							e.printStackTrace();
-						}
-												
-					}
-				};
-				itm.setOnAction(eh );
-			}
-		}*/
-		
+	
 		Scene scene = new Scene(page);
 		primaryStage.setTitle("Bacheca");
 		primaryStage.setScene(scene);

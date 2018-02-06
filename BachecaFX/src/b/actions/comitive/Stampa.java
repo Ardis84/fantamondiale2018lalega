@@ -25,7 +25,7 @@ public class Stampa {
 
 	public static void view(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/testimonianza_pubblica_stampa.fxml"));
+			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/comitive_stampa.fxml"));
 			AnchorPane page = (AnchorPane)loader.load();
 			ObservableList<Node> ch = page.getChildren();
 			

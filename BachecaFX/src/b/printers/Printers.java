@@ -2,6 +2,8 @@ package b.printers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 
 import javax.swing.JComboBox;
@@ -10,6 +12,8 @@ import org.json.JSONArray;
 
 import b.GePrato;
 import b.PrintJasper;
+import b.Utils;
+import b.printfoot.Comitive;
 import b.printfoot.TestimonianzaPubblica;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
@@ -56,6 +60,34 @@ public class Printers {
 				
 				//PrintProgramma.generateAndPrint(pp, name);
 
+	}
+	
+	public static void stampaComitive(String selMese, String selAnno) {
+		ArrayList<Date> dates = Utils.getAllDatesByMonthAndYear(Integer.valueOf(selMese),Integer.valueOf(selAnno));
+		
+		String nomeMese = Utils.getNameMese(Integer.valueOf(selMese));
+		
+		String q = " SELECT '"+nomeMese+"' as mese, "+selMese+" as nummese, "+selAnno+" as anno, "+
+				" (select om.descrizione from gp_offertemese om where om.numero=1 and om.mese = "+selMese+" and om.anno = "+selAnno+") as offerta1, "+
+				" (select om.descrizione from gp_offertemese om where om.numero=2 and om.mese = "+selMese+" and om.anno = "+selAnno+") as offerta2, "+
+				" (select om.descrizione from gp_offertemese om where om.numero=3 and om.mese = "+selMese+" and om.anno = "+selAnno+") as offerta3, "+
+				" ca.data, p.nome, p.cognome, c.luogo, c.giorno, c.ora "+
+				" FROM gp_comitiveassegnate ca, gp_comitive c, gp_proclamatori p " + 
+				" where ca.data >= STR_TO_DATE('"+Utils.reverseDateInString(dates.get(0))+"','%d/%m/%Y') "+
+				" and ca.data <= STR_TO_DATE('"+Utils.reverseDateInString(dates.get(dates.size()-1))+"','%d/%m/%Y') "+
+				" and ca.idconduttore = p.id "+
+				" and ca.idcomitiva = c.id "+
+				" and c.attivo = 1 "+
+				" order by ca.data, c.luogo, c.ora";
+		JSONArray elCom = GePrato.getSelectResponse(q);
+		String[] reportNames = {"comitive"};
+		Comitive[] javabeanarray = CreateParameterComitive.getRows(elCom);
+		
+		Hashtable<String, Object> parameters = new Hashtable<String, Object>();
+		JRDataSource beanArrayDataSource = new JRBeanArrayDataSource(javabeanarray);
+		PrintJasper.getPdfReport(reportNames, parameters , beanArrayDataSource);
+		
+		PrintJasper.openPdfViewer(reportNames);
 	}
 	
 }

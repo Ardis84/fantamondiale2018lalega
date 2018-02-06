@@ -12,8 +12,10 @@ import java.awt.event.MouseMotionAdapter;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import javax.swing.JComboBox;
@@ -41,24 +43,28 @@ public class GePrato {
 
 	public static  JSONArray getSelectResponse(String qry) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		qry = checkSpecials(qry);
 		map.put("qselect", trimQry(qry) );
 		return getResponse(map);
 	}
 	
 	public static  JSONArray getUpdateResponse(String qry) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		qry = checkSpecials(qry);
 		map.put("qupdate", trimQry(qry) );
 		return getResponse(map);
 	}
-	
+
 	public static  JSONArray getInsertResponse(String qry) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		qry = checkSpecials(qry);
 		map.put("qinsert", trimQry(qry) );
 		return getResponse(map);
 	}
 	
 	public static JSONArray getDeleteResponse(String qry) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		qry = checkSpecials(qry);
 		map.put("qdelete", trimQry(qry) );
 		return getResponse(map);
 	}
@@ -120,6 +126,19 @@ public class GePrato {
 	 
 		private static String trimQry(String qry) {
 			return qry.replaceAll(" ", "%20");
+		}
+		
+		private static String checkSpecials(String qry) {
+			/*if(qry.contains("'")) {
+				qry = qry.replaceAll("'", "%27");
+			}*/
+			try {
+				qry = URLEncoder.encode(qry, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return qry;
 		}
 		
 		private static String[] getFileOrderInSelect(String query, Object[] keys) {			

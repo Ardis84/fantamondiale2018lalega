@@ -1,15 +1,54 @@
 package b.printers;
 
-import org.json.JSONArray;
+import java.util.ArrayList;
+import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import b.Utils;
 import b.printfoot.Comitive;
 
 
 
 public class CreateParameterComitive {
 
+	public static Comitive[] getRows(JSONArray pp) {
+		Comitive[] c = new Comitive[pp.length()];
+		
+//		int nummese = pp.getJSONObject(0).getInt("nummese") ;	
+//		int anno = pp.getJSONObject(0).getInt("anno") ;
+		
+		//offerta1, offerta2, offerta3, ca.data, p.nome, p.cognome, c.luogo, c.giorno
+		for (int i = 0; i < pp.length(); i++) {
+			Comitive cv = new Comitive();
+			JSONObject obj = pp.getJSONObject(i);
+			
+			cv.setOffertamese1(obj.getString("offerta1"));
+			cv.setOffertamese2(obj.getString("offerta2"));
+			cv.setOffertamese3(obj.getString("offerta3"));
+			
+			cv.setData(obj.getString("data"));
+			cv.setConduttore(obj.getString("nome").substring(0,3)+" "+ obj.getString("cognome"));
+			cv.setLuogo(obj.getString("luogo"));
+			cv.setGiorno(obj.getString("giorno"));
+			cv.setOra(obj.getString("ora"));
+			
+			cv.setAnno(obj.getString("anno"));
+			cv.setMese(obj.getString("mese"));
+			
+			Date date = Utils.reverseStringInDate(obj.getString("data"), "yyyy-MM-dd");
+			String settimana = Utils.getSettimanaFromDateOnlyForMonth(date, obj.getInt("nummese"));
+			cv.setSettimana(settimana);
+			
+			c[i] = cv;
+		}
+		
+		return c;   
+		
+	}
 	
-	public static Comitive[] getRows(JSONArray pp) {    
+	public static Comitive[] getRowsOld(JSONArray pp) {    
 		int i = 0;
 		Comitive[] c = new Comitive[17];
 
