@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="titlePage" layoutX="14.0" layoutY="3.0" prefHeight="22.0" prefWidth="577.0" text="Offerte Del Mese" textAlignment="JUSTIFY">
+         <effect>
+            <Blend />
+         </effect>
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea id="offerta1" layoutX="33.0" layoutY="49.0" prefHeight="46.0" prefWidth="541.0" />
+      <TextArea id="offerta2" layoutX="33.0" layoutY="112.0" prefHeight="46.0" prefWidth="541.0" />
+      <TextArea id="offerta3" layoutX="33.0" layoutY="176.0" prefHeight="46.0" prefWidth="541.0" />
+      <Button id="salva" layoutX="277.0" layoutY="248.0" mnemonicParsing="false" text="Salva" />
+      <Label layoutX="33.0" layoutY="32.0" text="Offerta 1" />
+      <Label layoutX="33.0" layoutY="95.0" text="Offerta 2" />
+      <Label layoutX="33.0" layoutY="159.0" text="Offerta 3" />
+   </children>
+</AnchorPane>
