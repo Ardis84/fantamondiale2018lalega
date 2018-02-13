@@ -5,13 +5,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" stylesheets="@../css/elencoComitive.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
    <children>
       <fx:include fx:id="menubar" source="menubar.fxml" /> 
       <TableView id="elenco" layoutY="62.0" prefHeight="590.0" prefWidth="1031.0">
         <columns>
         </columns>
       </TableView>
-      <Button id="aggiungiComitive" layoutX="474.0" layoutY="31.0" mnemonicParsing="false" text="Aggiungi" />
+      <Button id="aggiungiComitive" layoutX="404.0" layoutY="31.0" mnemonicParsing="false" text="Aggiungi" />
+      <Button id="mod" disable="true" layoutX="478.0" layoutY="31.0" mnemonicParsing="false" text="Modifica" />
+      <Button id="canc" disable="true" layoutX="549.0" layoutY="31.0" mnemonicParsing="false" text="Cancella" />
    </children>
 </AnchorPane>

@@ -25,10 +25,21 @@
               <MenuItem mnemonicParsing="false" text="Stampa" />
             </items>
           </Menu>
+           <Menu mnemonicParsing="false" text="Incarichi">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Elenco" />
+              <MenuItem mnemonicParsing="false" text="Assegna" />
+            </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="Gruppi">
             <items>
               <MenuItem mnemonicParsing="false" text="Elenco" />
               <MenuItem mnemonicParsing="false" text="Stampa" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Impostazioni">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Date e Orari" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="?">

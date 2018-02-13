@@ -29,7 +29,7 @@ public class MenuPrincipal {
 					public void handle(ActionEvent event) {
 						
 						try {
-							String className = "b.actions."+labelMenu.toLowerCase().replaceAll(" ", "")+"."+labelItm.toUpperCase().replaceAll(" ", "").substring(0, 1)+labelItm.toLowerCase().replaceAll(" ", "").substring(1, labelItm.length());
+							String className = "b.actions."+labelMenu.toLowerCase().replaceAll(" ", "")+"."+labelItm.toUpperCase().replaceAll(" ", "").substring(0, 1)+labelItm.toLowerCase().replaceAll(" ", "").substring(1, labelItm.replaceAll(" ", "").length());
 							
 							if(labelMenu.equals("?"))
 								className = "b.actions.info.InfoPopUp";

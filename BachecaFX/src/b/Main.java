@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
+import org.json.JSONArray;
+
 import javafx.application.Application;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -20,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -30,20 +33,32 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("template/bacheca1.fxml"));
 		
-		Logs.write(getClass().getResource("template/bacheca1.fxml").getPath());
+		/* Controllo se esiste già una configurazione per questo pc procedo all'apertura se no avvio installazione */
+		JSONArray res = GePrato.getSelectResponse("select * from gp_installazioni where pcname='"+Utils.getPcName()+"'");
+		if(res.length()>0) {
 		
-		AnchorPane page = (AnchorPane)loader.load();
-		ObservableList<Node> ch = page.getChildren();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("template/bacheca1.fxml"));
+			
+			Logs.write(getClass().getResource("template/bacheca1.fxml").getPath());
 		
-		MenuBar mb = (MenuBar)ch.get(0);
-		MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
-	
-		Scene scene = new Scene(page);
-		primaryStage.setTitle("Bacheca");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+			
+			AnchorPane page = (AnchorPane)loader.load();
+			ObservableList<Node> ch = page.getChildren();
+			
+			MenuBar mb = (MenuBar)ch.get(0);
+			MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
+		
+			Scene scene = new Scene(page);
+			primaryStage.setTitle("Bacheca");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			
+		}else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("template/installazione.fxml"));
+			
+			Utils.openFile();
+		}
 		
 	}
 	

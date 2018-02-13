@@ -24,12 +24,14 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 public class PrintJasper {
 
 	static String pathSuper = Utils.getResourceUrl("reports").getPath();
-	static URL pathUrl = Utils.getResourceUrl("reports");
+	static String pathUrl = Utils.getResourcePath("reports");
 	
 	public static File getPdfReport(String[] reportNames, Hashtable<String, Object> parameters, JRDataSource beanArrayDataSource) {
 		File pdf = null;
-		String reportDir = pathSuper+"/";
-		String path = pathSuper+"/print/";
+//		String reportDir = pathSuper+"/";
+//		String path = pathSuper+"/print/";
+		String reportDir = pathUrl+"/";
+		String path = pathUrl+"/print/";
 		pdf = new File(path);
 		pdf.mkdirs();
 		
@@ -75,7 +77,8 @@ public class PrintJasper {
 	
 	
 	public static void openPdfViewer(String[] reportNames) {
-		String path =  pathSuper+"/print/";
+//		String path =  pathSuper+"/print/";
+		String path =  pathUrl+"/print/";
 		String filename = path+reportNames[0]+".pdf";
 		
 		Logs.write(path);

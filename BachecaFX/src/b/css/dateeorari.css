@@ -1,0 +1,44 @@
+#adunanze{
+	-fx-background-color: #FDDCD0;
+	-fx-border-color: #EBC3B5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5px;
+}
+
+#labelAdunanze{
+	-fx-font-weight: bold;
+	-fx-background-color: #EBC3B5;
+}
+
+#assemblee{
+	-fx-background-color: #D0FDDE;
+	-fx-border-color: #B7EBB5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5px;
+}
+
+#labelAssemblee{
+	-fx-font-weight: bold;
+	-fx-background-color: #B7EBB5;
+}
+
+#congressi{
+	-fx-background-color: #D1D0FD;
+	-fx-border-color: #B5C6EB;
+    -fx-border-width: 2;
+    -fx-border-radius: 5px;
+}
+
+#labelCongressi{
+	-fx-font-weight: bold;
+	-fx-background-color: #B5C6EB;
+}
+
+#salva{
+	-fx-font-weight: bold;
+	-fx-background-color: #FDEFD0;
+	-fx-font-size: 14px;
+	-fx-border-color: #C6AB70;
+	-fx-border-width:2;
+	-fx-border-radius: 5px;
+}

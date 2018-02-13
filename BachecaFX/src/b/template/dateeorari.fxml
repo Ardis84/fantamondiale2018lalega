@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include fx:id="menubar" source="menubar.fxml" />
+      <Pane id="adunanze" layoutX="25.0" layoutY="38.0" prefHeight="542.0" prefWidth="313.0">
+         <children>
+            <Label id="labelAdunanze" layoutX="1.0" prefHeight="17.0" prefWidth="312.0" text="ADUNANZE" />
+            <Label id="aduInfra" layoutX="21.0" layoutY="64.0" text="Infrasettimanale">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox id="selAduInfraGG" layoutX="116.0" layoutY="89.0" prefHeight="25.0" prefWidth="128.0" />
+            <Label id="aduInfra" layoutX="21.0" layoutY="167.0" text="Pubblica/TdG">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox id="selPubTdgGG" layoutX="116.0" layoutY="196.0" prefHeight="25.0" prefWidth="128.0" />
+            <ComboBox id="selAduInfraOra" layoutX="116.0" layoutY="126.0" prefHeight="25.0" prefWidth="71.0" />
+            <ComboBox id="selPubTdgOra" layoutX="116.0" layoutY="233.0" prefHeight="25.0" prefWidth="71.0" />
+            <Label id="aduInfra" layoutX="74.0" layoutY="93.0" text="Giorno" />
+            <Label id="aduInfra" layoutX="89.0" layoutY="130.0" text="Ora" />
+            <Label id="aduInfra" layoutX="89.0" layoutY="237.0" text="Ora" />
+            <Label id="aduInfra" layoutX="74.0" layoutY="200.0" text="Giorno" />
+         </children>
+      </Pane>
+      <Pane id="assemblee" layoutX="358.0" layoutY="38.0" prefHeight="542.0" prefWidth="313.0">
+         <children>
+            <Label id="labelAssemblee" layoutX="1.0" prefHeight="17.0" prefWidth="312.0" text="ASSEMBLEE" />
+            <DatePicker id="assemblea1" layoutX="106.0" layoutY="59.0" />
+            <DatePicker id="assemblea2" layoutX="107.0" layoutY="107.0" />
+            <Label id="aduInfra" layoutX="30.0" layoutY="62.0" text="Assemblea 1">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label id="aduInfra" layoutX="30.0" layoutY="111.0" text="Assemblea 2">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane id="congressi" layoutX="692.0" layoutY="38.0" prefHeight="542.0" prefWidth="313.0">
+         <children>
+            <Label id="labelCongressi" layoutX="1.0" prefHeight="17.0" prefWidth="312.0" text="CONGRESSI" />
+            <Label id="aduInfra" layoutX="33.0" layoutY="62.0" text="Congresso">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <DatePicker id="congressoDa" layoutX="110.0" layoutY="92.0" />
+            <Label id="aduInfra" layoutX="90.0" layoutY="96.0" text="da" />
+            <Label id="aduInfra" layoutX="97.0" layoutY="142.0" text="a" />
+            <DatePicker id="congressoA" layoutX="110.0" layoutY="138.0" />
+         </children>
+      </Pane>
+      <Button id="salva" layoutX="493.0" layoutY="602.0" mnemonicParsing="false" text="Salva" />
+   </children>
+   <stylesheets>
+      <URL value="@../css/elencoComitive.css" />
+      <URL value="@../css/dateeorari.css" />
+   </stylesheets>
+</AnchorPane>

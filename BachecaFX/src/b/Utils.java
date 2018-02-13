@@ -1,6 +1,9 @@
 package b;
 
+import java.net.InetAddress;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +24,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -31,6 +36,37 @@ public class Utils {
 			
 	public static URL getResourceUrl(String resourceName) {
 		return Utils.class.getResource(resourceName);
+	}
+	
+	public static String getResourcePath(String resourceName) {
+		String path = "";
+		try {
+			path =  Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()+"/b/"+resourceName;
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return path;
+	}
+	
+	public static String getPcName() {
+		InetAddress addr;
+		 String hostname  = "";
+	    try {
+			addr = InetAddress.getLocalHost();
+			hostname = addr.getHostName();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+	   
+	    return hostname;
+	}
+	
+	public static void openFile() {
+		Stage st = new Stage();
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Seleziona Cartella");
+		fileChooser.showOpenDialog(st);
 	}
 
 	public static String checkNull(String str) {
@@ -57,6 +93,14 @@ public class Utils {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("");
 		alert.setHeaderText("Attenzione!");
+		alert.setContentText(msg);
+
+		alert.showAndWait();
+	}
+	
+	public static void success(String msg) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("");
 		alert.setContentText(msg);
 
 		alert.showAndWait();
@@ -135,7 +179,7 @@ public class Utils {
 		return gc.get(Calendar.YEAR);
 	}
 	
-public static ArrayList<Date> getAllDatesByMonthAndYear(int mese, int anno) {
+	public static ArrayList<Date> getAllDatesByMonthAndYear(int mese, int anno) {
 		
 		ArrayList<Date> dates = new ArrayList<>();
 		
@@ -237,6 +281,11 @@ public static ArrayList<Date> getAllDatesByMonthAndYear(int mese, int anno) {
 		return c.getTime();
 	}
 
+	public static String[]  getNomiGiorniSettimana() {
+		String[] gg = "Lunedì,Martedì,Mercoledì,Giovedì,Venerdì,Sabato,Domenica".split(",");
+		return gg;
+	}
+	
 	/**  TableView 
 	 * @param tb 
 	 * @return **/

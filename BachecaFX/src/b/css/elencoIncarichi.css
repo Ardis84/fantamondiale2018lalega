@@ -1,0 +1,19 @@
+#aggiungi{
+	-fx-background-color: #00E78F;
+	-fx-cursor: pointer;
+}
+
+#mod{
+	-fx-background-color: #E7AC00;
+	-fx-cursor: pointer;
+}
+
+#canc{
+	-fx-background-color: #E73F00;
+	-fx-cursor: pointer;
+}
+
+#stampariepilogo{
+	-fx-background-color: #70C6B9;
+	-fx-cursor: pointer;
+}
