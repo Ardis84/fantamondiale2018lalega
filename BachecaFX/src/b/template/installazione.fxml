@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
    <children>
-      <Label layoutX="6.0" layoutY="6.0" prefHeight="17.0" prefWidth="582.0" text="Installazione BachecaFX">
+      <Button id="cartella" layoutX="96.0" layoutY="92.0" mnemonicParsing="false" text="Scegli cartella" />
+      <TextField id="url" disable="true" layoutX="198.0" layoutY="92.0" prefHeight="25.0" prefWidth="317.0" />
+      <Label id="infoinstallazione" alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="7.0" prefHeight="97.0" prefWidth="418.0" text="Seleziona la cartella in cui installare il programma" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Label>
+      <Button id="avanti" layoutX="426.0" layoutY="143.0" mnemonicParsing="false" text="Avanti &gt;&gt;">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
-      </Label>
-      <Button id="cartella" layoutX="88.0" layoutY="179.0" mnemonicParsing="false" text="Scegli cartella" />
-      <TextField id="url" disable="true" layoutX="190.0" layoutY="179.0" prefHeight="25.0" prefWidth="317.0" />
-      <Label layoutX="88.0" layoutY="69.0" prefHeight="97.0" prefWidth="418.0" text="Label" />
+      </Button>
    </children>
 </AnchorPane>

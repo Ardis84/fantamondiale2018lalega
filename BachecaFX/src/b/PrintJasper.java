@@ -4,12 +4,15 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
+
+import org.json.JSONArray;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -35,6 +38,7 @@ public class PrintJasper {
 		pdf = new File(path);
 		pdf.mkdirs();
 		
+		String pdfname = "";
 		Logs.write(reportDir);
 		
 		try{
@@ -44,8 +48,10 @@ public class PrintJasper {
 			if(parameters == null) parameters = new Hashtable<String, Object>();
 			
 			for(int k=0; k<reportNames.length;k++){
-				if(k==0)
+				if(k==0) {
 					path+=reportNames[k]+".pdf";
+					pdfname = reportNames[k]+".pdf";
+				}
 				reportTemplate = (reportDir+reportNames[k]+".jrxml");
 				jasper = (reportDir+reportNames[k]+".jasper");
 				//caricamento file JRXML
@@ -62,7 +68,15 @@ public class PrintJasper {
 
 			byte[] pagina=JasperExportManager.exportReportToPdf(jasperPrint);
 			
-			pdf = new File(path);
+			InputStream p = PrintJasper.class.getResourceAsStream("print");
+			
+			/* Recupero la cartella di installazione */
+			String inst = 	"select path from  gp_installazioni "+
+					"where pcname = '"+Utils.getPcName()+"'";
+			JSONArray rs = GePrato.getSelectResponse(inst);
+			path = rs.getJSONObject(0).getString("path");
+			
+			pdf = new File(path+"/"+pdfname);
 			FileOutputStream fos = new FileOutputStream(pdf);
 			fos.write( pagina);
 			fos.flush();
@@ -78,8 +92,14 @@ public class PrintJasper {
 	
 	public static void openPdfViewer(String[] reportNames) {
 //		String path =  pathSuper+"/print/";
-		String path =  pathUrl+"/print/";
-		String filename = path+reportNames[0]+".pdf";
+		//String path =  pathUrl+"/print/";
+		/* Recupero la cartella di installazione */
+		String inst = 	"select path from  gp_installazioni "+
+				"where pcname = '"+Utils.getPcName()+"'";
+		JSONArray rs = GePrato.getSelectResponse(inst);
+		String path = rs.getJSONObject(0).getString("path");
+
+		String filename = path+"/"+reportNames[0]+".pdf";
 		
 		Logs.write(path);
 		

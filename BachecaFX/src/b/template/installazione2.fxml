@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <Label id="infoinstallazione" alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="7.0" prefHeight="97.0" prefWidth="418.0" text="Attendi...." textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Label>
+      <ProgressIndicator id="progress" layoutX="236.0" layoutY="84.0" progress="0.0" />
+   </children>
+</AnchorPane>

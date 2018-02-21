@@ -1,5 +1,6 @@
 package b;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
@@ -62,11 +64,22 @@ public class Utils {
 	    return hostname;
 	}
 	
-	public static void openFile() {
+	public static String openFile() {
 		Stage st = new Stage();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Seleziona Cartella");
 		fileChooser.showOpenDialog(st);
+		
+		return fileChooser.getInitialFileName();
+	}
+	
+	public static String openFolder() {
+		Stage st = new Stage();
+		DirectoryChooser dc = new DirectoryChooser();
+		dc.setTitle("Seleziona Cartella");
+		File file = dc.showDialog(st);
+		
+		return file.getAbsolutePath();
 	}
 
 	public static String checkNull(String str) {
