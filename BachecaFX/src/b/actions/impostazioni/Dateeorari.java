@@ -146,12 +146,14 @@ public class Dateeorari {
 					LocalDate congrDa= dpCongrDa.getValue();
 					LocalDate congrA= dpCongrA.getValue();
 					
-					if(ggInfra!=null && oraInfra !=null && !ggInfra.isEmpty() && !oraInfra.isEmpty() ) {
+					if((ggInfra!=null && oraInfra !=null && !ggInfra.isEmpty() && !oraInfra.isEmpty()) || existAI ) {
 						if(!existAI) {
 							String insInfra = "INSERT INTO gp_dateorari(tipo, giorno, ora) VALUES";
 							insInfra += "('AI','"+ggInfra+"','"+oraInfra+"')";
 							GePrato.getInsertResponse(insInfra);
 						}else {
+							if(ggInfra==null)ggInfra="";
+							if(oraInfra==null)oraInfra="";
 							String upInfra = 	"update gp_dateorari "+
 												" set giorno = '"+ggInfra+"', "+
 												" ora = '"+oraInfra+"' "+
@@ -159,12 +161,14 @@ public class Dateeorari {
 							GePrato.getUpdateResponse(upInfra);
 						}
 					}
-					if(ggPubTdg!=null && ggPubTdg !=null && !ggPubTdg.isEmpty() && !ggPubTdg.isEmpty() ) {
+					if((ggPubTdg!=null && ggPubTdg !=null && !ggPubTdg.isEmpty() && !ggPubTdg.isEmpty()) || existAP ) {
 						if(!existAP) {
 							String insPubTdg= "INSERT INTO gp_dateorari(tipo, giorno, ora) VALUES";
 							insPubTdg += "('AP','"+ggPubTdg+"','"+oraPubTdg+"')";
 							GePrato.getInsertResponse(insPubTdg);
 						}else {
+							if(ggPubTdg==null)ggPubTdg="";
+							if(oraPubTdg==null)oraPubTdg="";
 							String upPubTdg = 	"update gp_dateorari "+
 									" set giorno = '"+ggPubTdg+"', "+
 									" ora = '"+oraPubTdg+"' "+
@@ -172,53 +176,86 @@ public class Dateeorari {
 							GePrato.getUpdateResponse(upPubTdg);
 						}
 					}
-					if(ass1!=null) {
+					if(ass1!=null || existAS1) {
 						if(!existAS1) {
 							String insAss1 = "INSERT INTO gp_dateorari(tipo, data) VALUES";
 							insAss1 += "('AS1','"+ass1+"')";
 							GePrato.getInsertResponse(insAss1);
 						}else {
-							String upAss1 = 	"update gp_dateorari "+
-									" set data = '"+ass1+"', "+
-									" where tipo = 'AS1'";
-							GePrato.getUpdateResponse(upAss1);
+							String upAss1 ="";
+							if(ass1==null) {
+								upAss1 = 	"delete from  gp_dateorari "+
+										" where tipo = 'AS1'";
+								GePrato.getDeleteResponse(upAss1);
+							}else {
+								upAss1 = 	"update gp_dateorari "+
+										" set data = '"+ass1+"' "+
+										" where tipo = 'AS1'";
+								GePrato.getUpdateResponse(upAss1);
+							}
+							
+							
 						}
 					}
-					if(ass2!=null) {
+					if(ass2!=null || existAS2) {
 						if(!existAS2) {
 							String insAss2 = "INSERT INTO gp_dateorari(tipo, data) VALUES";
 							insAss2 += "('AS2','"+ass2+"')";
 							GePrato.getInsertResponse(insAss2);
 						}else {
-							String upAss2 = 	"update gp_dateorari "+
-									" set data = '"+ass2+"', "+
-									" where tipo = 'AS2'";
-							GePrato.getUpdateResponse(upAss2);
+							String upAss2 ="";
+							if(ass2==null) {
+								upAss2 = 	"delete from gp_dateorari "+
+										" where tipo = 'AS2'";
+								GePrato.getDeleteResponse(upAss2);
+							}else {
+								 upAss2 = 	"update gp_dateorari "+
+										" set data = '"+ass2+"' "+
+										" where tipo = 'AS2'";
+								 GePrato.getUpdateResponse(upAss2);
+							}
+							
 						}
 					}
-					if(congrDa!=null) {
+					if(congrDa!=null || existCDA) {
 						if(!existCDA) {
 							String insCong = "INSERT INTO gp_dateorari(tipo, data) VALUES";
-							insCong += "('C','"+congrDa+"')";
+							insCong += "('CDA','"+congrDa+"')";
 							GePrato.getInsertResponse(insCong);
 						}else {
-							String upCong = 	"update gp_dateorari "+
-									" set data = '"+congrDa+"', "+
-									" where tipo = 'C'";
-							GePrato.getUpdateResponse(upCong);
+							String upCong ="";
+							if(congrDa==null) {
+								upCong = 	"delete from gp_dateorari "+
+										" where tipo = 'CDA'";
+								GePrato.getDeleteResponse(upCong);
+							}else {
+								upCong = 	"update gp_dateorari "+
+										" set data = '"+congrDa+"' "+
+										" where tipo = 'CDA'";
+								GePrato.getUpdateResponse(upCong);
+							}
+							
 						}
 					}
 					
-					if(congrA!=null) {
+					if(congrA!=null || existCA) {
 						if(!existCA) {
 							String insCong = "INSERT INTO gp_dateorari(tipo, data) VALUES";
-							insCong += "('C','"+congrA+"')";
+							insCong += "('CA','"+congrA+"')";
 							GePrato.getInsertResponse(insCong);
 						}else {
-							String upCong = 	"update gp_dateorari "+
-									" set data = '"+congrA+"', "+
-									" where tipo = 'C'";
-							GePrato.getUpdateResponse(upCong);
+							String upCong ="";
+							if(congrA==null) {
+								upCong = 	"delete from gp_dateorari "+
+										" where tipo = 'CA'";
+								GePrato.getDeleteResponse(upCong);
+							}else {
+								upCong = 	"update gp_dateorari "+
+										" set data = '"+congrA+"' "+
+										" where tipo = 'CA'";
+								GePrato.getUpdateResponse(upCong);
+							}
+							
 						}
 					}
 						
