@@ -20,10 +20,14 @@ import b.printfoot.AssegnaComitive;
 import b.printfoot.Comitive;
 import b.printfoot.ComitiveElenco;
 import b.printfoot.Proclamatori;
+import b.printfoot.VMRigheElementi;
+import b.printfoot.VitaMinisteroDett;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,13 +41,26 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -58,7 +75,7 @@ public class Programmi {
 		thisStage = primaryStage;
 		int c = 0;
 		try {
-			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/incarichi_assegna.fxml"));
+			FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/vitaministero_programmi.fxml"));
 			AnchorPane page = (AnchorPane)loader.load();	
 			
 			//ObservableList<Node> ch = page.getChildren();
@@ -101,14 +118,6 @@ public class Programmi {
 			};
 			bt.setOnAction(eh);
 			
-			Label stato = (Label)page.lookup("#stato");
-			Label labelStato = (Label)page.lookup("#labelStato");
-			CheckBox chiudi = (CheckBox)page.lookup("#chiudi");	
-			
-			stato.setVisible(false);
-			labelStato.setVisible(false);
-			chiudi.setVisible(false);
-			
 			primaryStage.show();
 		}catch (Exception e) {
 			System.out.println("Riga "+c+"  :  "+e);
@@ -119,13 +128,7 @@ public class Programmi {
 
 		ComboBox selmese = (ComboBox)stage.getScene().lookup("#mese");
 		ComboBox selanno = (ComboBox)stage.getScene().lookup("#anno");
-		Button sa = (Button)stage.getScene().lookup("#salvaAssegnazioni");
-		sa.setDisable(true);
-		
-		Button offertemese = (Button)stage.getScene().lookup("#offertemese");
-		offertemese.setDisable(false);
-		offertemese.setOnAction(getOfferteMeseAction(stage));
-		
+
 		int numMese = selmese.getSelectionModel().getSelectedIndex();
 		int anno = Integer.valueOf((String)selanno.getSelectionModel().getSelectedItem());
 		
@@ -133,243 +136,604 @@ public class Programmi {
 		
 		/* Recupero tutte le comitive inserite */	
 		
-		String qry = "select attivo, giorno, id, luogo, ora from gp_comitive c where c.attivo = 1 order by attivo, luogo, giorno, ora";
+		String qry = 	"select giorno, ora " + 
+						"from gp_dateorari " + 
+						"where tipo = 'AI'";
 		JSONArray res = GePrato.getSelectResponse(qry);
 		
 		totComitiveMese = 0;
 		
-		TableView<AssegnaComitive> tb = (TableView<AssegnaComitive>)stage.getScene().lookup("#tabellaAssegnazione");
-		tb.getColumns().clear();
+		ArrayList<VitaMinisteroDett> ar = new ArrayList<>();
 		
-		ArrayList<AssegnaComitive> ar = new ArrayList<>();
+		/* Ciclo le date del mese e verifico i giorni delle adunanze infrasettimanali */
 		
-		/* Ciclo le date del mese e verifico in quali giorni sono presenti comitive */
+		BackgroundFill f1 = new BackgroundFill(Color.valueOf("acdcf7") , CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg1 = new Background(f1);
+		BackgroundFill f2 = new BackgroundFill(Color.valueOf("fbd89d") , CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg2 = new Background(f2);
+		BackgroundFill f3 = new BackgroundFill(Color.valueOf("ff9d83") , CornerRadii.EMPTY, Insets.EMPTY);
+		Background bg3 = new Background(f3);
 		
-		int numConduttoriGiaAssegnati = 0;
-		int totDateComitiveMese = 0;
+		ScrollPane spane = (ScrollPane)stage.getScene().lookup("#scroll");
 		
+		double w = spane.getWidth()-30;
+		
+		VBox vb = new VBox();
+		vb.setMinWidth(w);
+		vb.setMaxWidth(w);
+		
+		int bgNumber = 1;
 		for (int i = 0; i < dates.size(); i++) {
 			Date d = dates.get(i);
 			String dayName = Utils.getDayNameByDate(d);
 			for (int j = 0; j < res.length(); j++) {
 				JSONObject obj = res.getJSONObject(j);
 				String gg = obj.getString("giorno");
-				String attivo = obj.getString("attivo");
-				if(gg.substring(0, 3).toLowerCase().equals(dayName.substring(0, 3).toLowerCase())  && attivo.equals("1")) {
-					totDateComitiveMese++;
-					Label l = new Label();
-					l.setText(Utils.reverseDateInString(d)+" - "+dayName+" - "+obj.getString("ora")+" - "+obj.getString("luogo")+" ");
-					
-					AssegnaComitive e = new AssegnaComitive();
+				String ora = obj.getString("ora");
+				if(gg.substring(0, 3).toLowerCase().equals(dayName.substring(0, 3).toLowerCase())) {					
 					String data = Utils.reverseDateInString(d);
-					e.setId(obj.getString("id"));
-					e.setData(data);
-					e.setGiorno(dayName);			
-					e.setLuogo(obj.getString("luogo"));
-					e.setOra(obj.getString("ora"));
-					/*** Conduttori ***/
 					
-					/* verifico che non sia già stata assegnata */
-					String qV = " SELECT * FROM gp_comitiveassegnate ca " + 
-							 	" where ca.data = STR_TO_DATE('"+data+"','%d/%m/%Y') "+
-								" and idcomitiva = "+obj.getString("id");
+					VitaMinisteroDett vmd = getSavedVMDett(gg,data);
+																	
+					BackgroundFill fills = new BackgroundFill(Color.valueOf("ebf4fb") , CornerRadii.EMPTY, Insets.EMPTY);
+					Background bgL = new Background(fills);
+					BorderWidths bw = new BorderWidths(0, 0, 2, 0);
+					CornerRadii cr = new CornerRadii(3);
+					Border border = new Border(new BorderStroke(Color.valueOf("888888"), 
+				            BorderStrokeStyle.SOLID, cr, bw));
 					
-					JSONArray rV = GePrato.getSelectResponse(qV);
-					String  idcondSalvato = null;
-					if(rV.length()>0) {
-						 idcondSalvato = rV.getJSONObject(0).getString("idconduttore");
-						 numConduttoriGiaAssegnati++;
-					}
-					/* recupero tutti gli anziani e i servitori */
-					String q = 	" SELECT cognome, nome, id FROM gp_proclamatori p " + 
-								" where (p.anziano = 1 or p.sdm=1) " + 
-								" and p.idcongregazione = 1";
-					JSONArray r = GePrato.getSelectResponse(q);
-					ArrayList<String> cond = new ArrayList<>();
-					for (int k = 0; k < r.length(); k++) {
-						JSONObject objCond = r.getJSONObject(k);
-						String cog = objCond.getString("cognome");
-						String nome = objCond.getString("nome");
-						cond.add(cog+" "+nome);
-						if(idcondSalvato!=null && idcondSalvato.equals(objCond.getString("id")))
-							idcondSalvato = k+"";
-					}
-					ComboBox<String> b = new ComboBox<>();
-					b.getItems().addAll(cond);
-					if(idcondSalvato!=null)
-						b.getSelectionModel().select(Integer.valueOf(idcondSalvato));
-					EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
-						
-						@Override
-						public void handle(ActionEvent event) {
-							
-							if(b.getSelectionModel().getSelectedItem()!=null)
-								sa.setDisable(false);
-							
-						}
-					};
-					b.setId("cond_"+totComitiveMese);
-					b.setOnAction(eh);
-					e.setConduttore(b);
-					ar.add(e);
-					totComitiveMese++;
-					//VBox vb = (VBox)stage.getScene().lookup("#vbox");
-					//vb.getChildren().add(l);
-				}				
-			}			
-		}		
-		
-		/* STATI
-		 * 
-		 * DA ASSEGNARE  (quando non c'è nessuna assegnazione)
-		 * DA COMPLETARE/MODIFICARE  (quando c'è almeno una assegnazione)
-		 * CHIUSO  (quando ci sono tutte le assegnazioni e/o è stato indicata la chiusura)
-		 */
-		
-		int chiuso = 0;
-		Label stato = (Label)stage.getScene().lookup("#stato");
-		Label labelStato = (Label)stage.getScene().lookup("#labelStato");
-		CheckBox chiudi = (CheckBox)stage.getScene().lookup("#chiudi");		
-		Button stampa = (Button)stage.getScene().lookup("#stampa");
-		stampa.setDisable(true);
-		stampa.setOnAction(getStampa(stage));
-		
-		stato.setVisible(true);
-		labelStato.setVisible(true);
-		chiudi.setVisible(true);
-		
-		if(numConduttoriGiaAssegnati==0) {
-			stato.setText("DA ASSEGNARE");
-			stato.setTextFill(Color.web("#00B413"));
-		}else if(numConduttoriGiaAssegnati>0 && numConduttoriGiaAssegnati<totDateComitiveMese) {
-			stato.setText("DA COMPLETARE");
-			stato.setTextFill(Color.web("#E78500"));
-			stampa.setDisable(false);
-		}else if(numConduttoriGiaAssegnati==totDateComitiveMese || chiuso == 1) {
-			stato.setText("COMPLETO");
-			stato.setTextFill(Color.web("#E70000"));
-			stampa.setDisable(false);
-		}
-		
-		
-		EventHandler<ActionEvent> ehSa = new EventHandler<ActionEvent>() {
+					Insets pad = new Insets(3);
+					
+					String nomeMese = Utils.getNameMese(Utils.getMonthFromDate(d));
+					nomeMese = nomeMese.substring(0, 1).toUpperCase()+""+nomeMese.substring(1,nomeMese.length()).toLowerCase();
+					int numGG = Utils.getDayNumberFromDate(d);
 			
-			@Override
-			public void handle(ActionEvent event) {
-				for (int i = 0; i < totComitiveMese; i++) {
-					ComboBox cond = (ComboBox)stage.getScene().lookup("#cond_"+i);
-					String sel = (String)cond.getSelectionModel().getSelectedItem();
-					if(sel!=null && !sel.equals("")) {
-						String[] arSelCond = sel.split(" ");
-						String qry1= "select id from gp_proclamatori where cognome = '"+arSelCond[0]+"' and nome = '"+arSelCond[1]+"'";
-						JSONArray r1 = GePrato.getSelectResponse(qry1);					
-						String idcond = null;
-						if(r1.length()>0 && r1.length()<2) {
-							idcond = r1.getJSONObject(0).get("id").toString();
+					VBox vbAdunanza = new VBox();
+					//vbAdunanza.setBackground(bgL);
+					//vbAdunanza.setBorder(border);
+					vbAdunanza.setPadding(pad);
+					vbAdunanza.setMaxWidth(w);
+					
+					//vbAdunanza.getChildren().add(l);
+
+					/*Controllo se esistono già dei dati inseriti per questa adunanza*/
+					//vbAdunanza = addAllSavedDetails(vbAdunanza, vmd, anno, numMese);
+					
+					int h = 50;
+					
+					/* Riga 0 */
+					
+					CheckBox cb = new CheckBox();
+					cb.setText("Assemblea/Congresso");
+					cb.setId("chkAssembleaCongresso");
+					
+					StackPane sp = new StackPane(cb );
+					sp.setAlignment( cb, Pos.CENTER_LEFT );
+					sp.setBorder(border);
+					vbAdunanza.getChildren().add(sp);					
+					
+					Label emptyNode = new Label();
+					
+					/* Riga 1 */
+					
+					Label l = new Label();
+					String formatLabel = dayName.toUpperCase()+" "+numGG+" "+nomeMese+" "+anno;
+					l.setText(formatLabel); 
+					l.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+					
+					/* cantico1 */
+					Button addCantico1 = new Button();
+					addCantico1.setText("Cantico");
+					addCantico1.setId("cantico1");
+					addCantico1.setOnAction(openCantico(gg,data,1));
 							
-							TableView<AssegnaComitive> tb1 = (TableView<AssegnaComitive>)stage.getScene().lookup("#tabellaAssegnazione");
-							ObservableList<AssegnaComitive> itms = tb1.getItems();
-							AssegnaComitive row = itms.get(i);
-							
-							/* Controllo s eesiste già un salvataggio perla stessa comitiva */
-							String chk = " select * " + 
-										 " from gp_comitiveassegnate ca " + 
-										 " where ca.data = STR_TO_DATE('"+row.getData()+"','%d/%m/%Y') "+
-										 " and idcomitiva = "+row.getId();
-							JSONArray rC = GePrato.getSelectResponse(chk);
-							if(rC.length()==0) {
-								String ins1 = "insert into gp_comitiveassegnate "
-										  + " (idcomitiva, data, idconduttore) "
-										  + " values ("+row.getId()+", "
-										  + " STR_TO_DATE('"+row.getData()+"','%d/%m/%Y'), "
-										  + " "+idcond+") ";
-								GePrato.getInsertResponse(ins1);
-							}else {
-								String ins1 = "update gp_comitiveassegnate "
-										  + " set idconduttore = "+idcond+" "
-										  + " where data = STR_TO_DATE('"+row.getData()+"','%d/%m/%Y') "
-										  + " and idcomitiva = "+row.getId();
-								GePrato.getUpdateResponse(ins1);
-							}
-							
-							
-						}
-					}
-				}
-			
+					Label pc1 = createResponseLabel("label_cantico1","");
+					
+					StackPane spc1 = createStackPane(addCantico1,pc1,w/8);
+					
+					/* Preghiera iniziale */
+					Label pi = createResponseLabel("label_pregIniziale", "");
+					
+					Button addPI = new Button();
+					addPI.setText("Preghiera Iniziale");
+					addPI.setId("pregIniziale");
+					
+					StackPane sppi =  createStackPane(addPI,pi,w/4);
+					/* ***/
+					
+					sp = new StackPane(l, spc1, sppi );
+					sp.setAlignment( spc1, Pos.CENTER);
+					sp.setAlignment( l, Pos.CENTER_LEFT );
+					sp.setAlignment( sppi, Pos.CENTER_RIGHT );
+					sp.setBorder(border);
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 2 */
+					Label cimin = new Label();
+					cimin.setText("Min 03");
+					cimin.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+					
+					Label ci = new Label();
+					ci.setText("Commenti Introduttivi ");
+					ci.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+					
+					Label lPres = createResponseLabel("label_presidente","");
+					
+					Button addPres = new Button();
+					addPres.setText("Presidente");
+					addPres.setId("presidente");				
+					
+					StackPane sppr = createStackPane(addPres,lPres,w/3);
+					
+					ci.setAlignment(Pos.CENTER_LEFT);
+					
+					StackPane colum = new StackPane(cimin, ci);
+					colum.setAlignment( cimin, Pos.CENTER_LEFT );
+					colum.setAlignment( ci, Pos.CENTER_RIGHT );
+					colum.setMaxWidth(w/2);
+					
+					sp = new StackPane(colum, sppr );
+					sp.setAlignment( colum, Pos.CENTER_LEFT );
+					sp.setAlignment( sppr, Pos.CENTER_RIGHT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 3 */
+					Label titleTesori = new Label();
+					titleTesori.setText("TESORI DELLA PAROLA DI DIO");
+					titleTesori.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+					
+					/* lettura */
+					Button addLetturaSettimana = new Button();
+					addLetturaSettimana.setText("Capitoli in programma");
+					addLetturaSettimana.setId("capitoliLettura");
+					
+					Label lCapProg = createResponseLabel("label_capitoliLettura","");			
+					
+					StackPane spcp = createStackPane(addLetturaSettimana,lCapProg,w/4);
+									
+					sp = new StackPane(titleTesori, spcp );
+					sp.setAlignment( titleTesori, Pos.CENTER_LEFT );
+					sp.setAlignment( spcp, Pos.CENTER );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 4 */
+//					/* minuti parte */
+//					Button addMinParte = new Button();
+//					addMinParte.setText("Minuti");
+					
+					/* Parte */
+					Button addParte = new Button();
+					addParte.setText("Discorso");
+					addParte.setId("discorsoTesori");
+					
+					Label ldiscorsoTesori = createResponseLabel("label_discorsoTesori","");			
+					
+					StackPane spdt = createStackPane(addParte,ldiscorsoTesori,w);
+					
+//					/* Oratore */
+//					Button addOratore = new Button();
+//					addOratore.setText("Oratore");
+//									
+					sp = new StackPane(spdt);
+					sp.setAlignment( spdt, Pos.CENTER_LEFT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 5 */				
+					/* Parte */
+					Button addScaviamo = new Button();
+					addScaviamo.setText("Scaviamo per trovare gemme spirituali");
+					addScaviamo.setId("scaviamo");
+					
+					Label lscaviamo = createResponseLabel("label_scaviamo","");			
+					
+					StackPane spsca = createStackPane(addScaviamo,lscaviamo,w);
+					
+					sp = new StackPane(spsca);
+					sp.setAlignment( spsca, Pos.CENTER_LEFT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+
+					/* Riga 6 */				
+					/* Parte */
+					Button lettura = new Button();
+					lettura.setText("Lettura Biblica");
+					lettura.setId("lettura");
+					
+					Label llettura = createResponseLabel("label_lettura","");			
+					
+					StackPane splet = createStackPane(lettura,llettura,w);
 				
-			}
-		};
-		sa.setOnAction(ehSa );
+					sp = new StackPane(splet);
+					sp.setAlignment( splet, Pos.CENTER_LEFT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 7 */
+					Label efficaci = new Label();
+					efficaci.setText("EFFICACI NEL MINISTERO");
+					efficaci.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+					
+					/* sala1 */
+					Label sala1 = new Label();
+					sala1.setText("Sala Principale");
+					sala1.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+					
+					/* sala2 */
+					Label sala2 = new Label();
+					sala2.setText("Classe suplementare");
+					sala2.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+									
+					sp = new StackPane(efficaci, sala1, sala2);
+					sp.setAlignment( efficaci, Pos.CENTER_LEFT );
+					sp.setAlignment( sala1, Pos.CENTER );
+					sp.setAlignment( sala2, Pos.CENTER_RIGHT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);				
+					
+					/* Riga 8 */
+					Button disc = new Button();
+					disc.setText("Esercitazione1");
+					disc.setId("eserc1");
+					
+					/* sala 1*/
+					Label leserc1_sala1 = createResponseLabel("label_eserc1_sala1","");	
+					/* sala 2*/
+					Label leserc1_sala2 = createResponseLabel("label_eserc1_sala2","");	
+					
+					sp = new StackPane(disc,leserc1_sala1,leserc1_sala2);
+					sp.setAlignment( disc, Pos.CENTER_LEFT );
+					sp.setAlignment( leserc1_sala1, Pos.CENTER );
+					sp.setAlignment( leserc1_sala2, Pos.CENTER_RIGHT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 9 */
+					disc = new Button();
+					disc.setText("Esercitazione2");
+					disc.setId("eserc2");
+				
+					/* sala 1*/
+					Label leserc2_sala1 = createResponseLabel("label_eserc2_sala1","");	
+					/* sala 2*/
+					Label leserc2_sala2 = createResponseLabel("label_eserc2_sala2","");	
+					
+					sp = new StackPane(disc,leserc2_sala1,leserc2_sala2);
+					sp.setAlignment( disc, Pos.CENTER_LEFT );
+					sp.setAlignment( leserc2_sala1, Pos.CENTER );
+					sp.setAlignment( leserc2_sala2, Pos.CENTER_RIGHT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 10 */
+					disc = new Button();
+					disc.setText("Esercitazione3");
+					disc.setId("eserc3");
+				
+					/* sala 1*/
+					Label leserc3_sala1 = createResponseLabel("label_eserc3_sala1","");	
+					/* sala 2*/
+					Label leserc3_sala2 = createResponseLabel("label_eserc3_sala2","");	
+					
+					sp = new StackPane(disc,leserc3_sala1,leserc3_sala2);
+					sp.setAlignment( disc, Pos.CENTER_LEFT );
+					sp.setAlignment( leserc3_sala1, Pos.CENTER );
+					sp.setAlignment( leserc3_sala2, Pos.CENTER_RIGHT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 11 */
+					Label vitac = new Label();
+					vitac.setText("VITA CRISTIANA");
+					vitac.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+					
+					/* lettura */
+					Button addCantico2 = new Button();
+					addCantico2.setText("Cantico");
+					addCantico2.setId("cantico2");
+					addCantico2.setOnAction(openCantico(gg,data,2));
+					
+					Label pc2 = createResponseLabel("label_cantico2","");
+					
+					StackPane spc2 = createStackPane(addCantico2,pc2,w/4);
+									
+					sp = new StackPane(vitac, spc2 );
+					sp.setAlignment( vitac, Pos.CENTER_LEFT );
+					sp.setAlignment( addCantico2, Pos.CENTER );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 12 */
+					Button addParti = new Button();
+					addParti.setText("Parti");
+					addParti.setId("partiVitaC");
+				
+					sp = new StackPane(addParti);
+					sp.setAlignment( addParti, Pos.CENTER_LEFT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+
+					/* Riga 12 bis */
+					
+					TextArea taParti = new TextArea();
+					taParti.setId("txt_parti");
+					taParti.setMaxWidth(w);
+					taParti.setMinHeight(15);
+					taParti.setEditable(false);
+					taParti.setText("VUOTO");
+					
+					sp = new StackPane(taParti);
+					sp.setAlignment( taParti, Pos.CENTER_LEFT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					/* Riga 13 */
+					Button addCantico3 = new Button();
+					addCantico3.setText("Cantico");
+					addCantico3.setId("cantico3");
+					addCantico3.setOnAction(openCantico(gg,data,3));
+					
+					Label pc3 = createResponseLabel("label_cantico3","");
+					
+					StackPane spc3 = createStackPane(addCantico3,pc3,w/4);
+				
+					Label pc = createResponseLabel("label_pregConclusiva", "");
+					
+					Button addPC = new Button();
+					addPC.setText("Preghiera Conclusiva");
+					addPC.setId("pregConclusiva");
+					
+					StackPane sppc = new StackPane(addPC ,pc);
+					sppc.setAlignment( addPC, Pos.CENTER_LEFT);
+					sppc.setMaxWidth(w/3);
+					
+					emptyNode.setMinWidth(w/3);
+					
+					sp = new StackPane(spc3, sppc, emptyNode);
+					sp.setAlignment( addCantico3, Pos.CENTER );
+					sp.setAlignment( sppc, Pos.CENTER_RIGHT );
+					sp.setAlignment( emptyNode, Pos.CENTER_LEFT );
+					sp.setBackground(bgL);
+					sp.setBorder(border);				
+					vbAdunanza.getChildren().add(sp);
+					
+					
+					if(bgNumber==1) {
+						bgNumber++;
+						vbAdunanza.setBackground(bg1);
+					}else if(bgNumber == 2) {
+						bgNumber++;
+						vbAdunanza.setBackground(bg2);
+					}else {
+						bgNumber = 1;
+						vbAdunanza.setBackground(bg3);
+					}
+										
+					vb.getChildren().add(vbAdunanza);
+					vb.setMargin(vbAdunanza, pad);
+
+				}				
+			}	
+			
+			
+		}		
+
+		spane.setContent(vb);
 		
 		
-		ObservableList<AssegnaComitive> lst = (ObservableList<AssegnaComitive>) ObservableListMaker.createList(ar);
-		tb.setItems(lst);
-		tb = (TableView<AssegnaComitive>) Utils.createTableColumnsListFromString(tb, "data, giorno, luogo, ora, conduttore");
-		tb.setEditable(true);
 		
 	}
 
-	private static EventHandler<ActionEvent> getOfferteMeseAction(Stage stage) {
+
+	private static Label createResponseLabel(String id, String text) {
+		
+		BackgroundFill fills = new BackgroundFill(Color.valueOf("E8ECEC") , CornerRadii.EMPTY, Insets.EMPTY);
+		Background bgL = new Background(fills);
+		
+		if(text==null || text.isEmpty())
+			text = "Vuoto";
+		
+		Label l = new Label();
+		l.setText(text);
+		l.setId(id);
+		l.setFont(Font.font("Verdana", FontWeight.EXTRA_LIGHT, 13));
+		l.setTextFill(Color.RED);
+		//l.setBackground(bgL);
+		l.setMinWidth(20);
+		return l;
+	}
+
+	private static StackPane createStackPane(Node node1, Node node2, double w) {
+		StackPane sp = new StackPane(node1, node2 );
+		sp.setAlignment( node1, Pos.CENTER_LEFT);
+		sp.setAlignment( node2, Pos.CENTER_RIGHT );
+		sp.setMaxWidth(w);
+		return sp;
+		
+	}
+
+	private static EventHandler<ActionEvent> openCantico(String gg, String data, int numero) {
 		EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				ComboBox selmese = (ComboBox)stage.getScene().lookup("#mese");
-				ComboBox selanno = (ComboBox)stage.getScene().lookup("#anno");
-				int nummese = (selmese.getSelectionModel().getSelectedIndex())+1;
-				Object numanno = selanno.getSelectionModel().getSelectedItem();
-				
-				
-				FXMLLoader loader1 = new FXMLLoader(Utils.getResourceUrl("template/offertemese.fxml"));
-				
 				try {
-					AnchorPane page1 = (AnchorPane)loader1.load();
-					Scene scene2 = new Scene(page1);
-					Stage newStage = new Stage();
+					Stage st = new Stage();
+					FXMLLoader loader = new FXMLLoader(Utils.getResourceUrl("template/add_cantico.fxml"));
+					AnchorPane page = (AnchorPane)loader.load();
 					
-					Button salva = (Button)page1.lookup("#salva");
-					salva.setOnAction(salvaOfferteMese(newStage,page1, nummese, numanno));
+					Scene scene = new Scene(page);
+					st.setTitle("Cantico "+numero+" del "+data);
+					st.setScene(scene);
 					
-					/* Se esistono offerte per questo mese le visualizzo */
-					TextArea of1 = (TextArea)page1.lookup("#offerta1");
-					TextArea of2 = (TextArea)page1.lookup("#offerta2");
-					TextArea of3 = (TextArea)page1.lookup("#offerta3");
+					loader.getResources();
 					
-					String off = " select * " + 
-							 " from gp_offertemese om " + 
-							 " where om.anno = "+numanno+" "+
-							 " and om.mese = "+nummese;
-					JSONArray rOff = GePrato.getSelectResponse(off);
-					for (int i = 0; i < rOff.length(); i++) {
-						JSONObject obj = rOff.getJSONObject(i);
-						String numero = obj.getString("numero");
-						if(numero.equals("1"))
-							of1.setText(obj.getString("descrizione"));
-						else if(numero.equals("2"))
-							of2.setText(obj.getString("descrizione"));
-						else if(numero.equals("3"))
-							of3.setText(obj.getString("descrizione"));
-						
-					}
+					Label titolo = (Label)page.lookup("#titolo");
+					TextField cantico = (TextField)page.lookup("#cantico");
+					Button salva = (Button) page.lookup("#salva");
+					salva.setOnAction(saveCantico(gg,data,numero,st));
 					
+					titolo.setText("Numero");
 					
-					
-				     newStage.setScene(scene2);
-				     //tell stage it is meannt to pop-up (Modal)
-				     newStage.initModality(Modality.APPLICATION_MODAL);
-				     newStage.setTitle("Offerte Mese ");
-				     newStage.show();
+					st.show();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}						
+				}
+				
 			}
 
 			
-
-		};
+		};		
+		
 		return eh;
+	}
+
+	private static EventHandler<ActionEvent> saveCantico(String gg, String data, int numero, Stage st) {
+		EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					TextField cantico = (TextField)st.getScene().lookup("#cantico");
+					String c = cantico.getText();
+					if(!c.isEmpty()) {
+						String existsVMD = checkIfExistsVMDett(gg,data);
+						if(existsVMD!=null) {
+							String q = "update gp_vitaministerodett "
+									+ " set cantico"+numero+"='"+c+"' "
+									+ " where id = "+existsVMD;
+							GePrato.getUpdateResponse(q);
+						}else {
+							String existsVM = checkIfExistsVM(gg,data);
+							if(existsVM==null) {
+								int mese = Utils.getMonthFromDate(Utils.reverseStringInDate(data, "dd/mm/yyyy"));
+								int anno = Utils.getYearFromDate(Utils.reverseStringInDate(data, "dd/mm/yyyy"));
+								String strMese = Utils.getNameMese(mese);
+								String q1 = "insert into gp_vitaministero "
+										+ "(mese, anno) "
+										+ " values ('"+strMese+"',"+anno+")";
+								GePrato.getInsertResponse(q1);
+								existsVM = checkIfExistsVM(gg,data);
+							}
+							String q2 = "insert into gp_vitaministerodett "
+									+ " (data, giorno, cantico"+numero+", idvm) "
+									+ " values (STR_TO_DATE('"+data+"', '%d/%m/%Y'),'"+gg+"','"+c+"',"+existsVM+")";
+							GePrato.getInsertResponse(q2);
+						}
+						
+						st.close();
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			
+			}
+	
+		
+		};		
+	
+		return eh;
+	}
+	
+	private static String checkIfExistsVMDett(String gg, String data) {
+		String id = null;
+		String q1 = "select vd.id from gp_vitaministerodett vd "
+				+ "where vd.data=STR_TO_DATE('"+data+"', '%d/%m/%Y') and vd.giorno = '"+gg+"'";
+		JSONArray rs1 = GePrato.getSelectResponse(q1);
+		if(rs1.length()>0) {
+			id = rs1.getJSONObject(0).getString("id");
+		}
+		return id;
+	}
+	
+	private static String checkIfExistsVM(String gg, String data) {
+		int mese = Utils.getMonthFromDate(Utils.reverseStringInDate(data, "dd/mm/yyyy"));
+		int anno = Utils.getYearFromDate(Utils.reverseStringInDate(data, "dd/mm/yyyy"));
+		String strMese = Utils.getNameMese(mese);
+		String id = null;
+		String q1 = "select vm.id from gp_vitaministero vm where vm.mese='"+strMese+"' and anno = "+anno+"";
+		JSONArray rs1 = GePrato.getSelectResponse(q1);
+		if(rs1.length()>0) {
+			id = rs1.getJSONObject(0).getString("id");
+		}
+		return id;
+	}
+	
+	private static VitaMinisteroDett getSavedVMDett(String gg, String data) {
+		VitaMinisteroDett vmd = null;
+		Date d = Utils.reverseStringInDate(data, "dd/mm/yyyy");
+		int mese = Utils.getMonthFromDate(d);
+		int anno = Utils.getYearFromDate(d);
+		String strMese = Utils.getNameMese(mese);
+		//Innanzitutto controllo che esista nella tabella vitaministero
+		String q1 = "select * from gp_vitaministero vm where vm.mese='"+mese+"' and anno = "+anno+"";
+		JSONArray rs1 = GePrato.getSelectResponse(q1);
+		if(rs1.length()>0) {
+			JSONObject obj = rs1.getJSONObject(0);
+			int idvm = obj.getInt("id");
+			String q2 = "select * from gp_vitaministerodett vmd vmd.idvm = "+idvm+" and giorno = '"+gg+"'"
+					+ " and data =  STR_TO_DATE('"+data+"', '%d/%m/%Y')";
+			JSONArray rs2 = GePrato.getSelectResponse(q1);
+			if(rs2.length()>0){
+				JSONObject obj1 = rs2.getJSONObject(0);
+				int idvmd = obj1.getInt("id");
+				vmd = new VitaMinisteroDett();
+				vmd.setCantico1(obj1.getString("cantico1"));
+				vmd.setCantico2(obj1.getString("cantico2"));
+				vmd.setCantico3(obj1.getString("cantico3"));
+				//vmd.set(obj1.getString("cantico1"));
+				/** TODO */
+			}
+		}
+		return vmd;
+	}
+
+	private static VBox addAllSavedDetails(VBox vbAdunanza, VitaMinisteroDett vmd, int anno, int numMese) {
+		
+		String mese = Utils.getNameMese(numMese);
+		
+		String q = "select * from gp_vitaministero vm where vm.mese='"+mese+"' and anno = "+anno+"";
+		JSONArray rs = GePrato.getSelectResponse(q);
+		if(rs.length()>0) {
+			JSONObject obj = rs.getJSONObject(0);
+			int idvm = obj.getInt("id");
+			String q1 = "select * from gp_vitaministerodett vmd vmd.idvm = "+idvm;
+			JSONArray rs1 = GePrato.getSelectResponse(q1);
+			for (int i = 0; i < rs1.length(); i++) {
+				JSONObject obj1 = rs1.getJSONObject(i);
+				/** TODO **/
+			}
+			
+		}else {
+			VBox v = new VBox();
+			
+			BackgroundFill fills = new BackgroundFill(Color.valueOf("ffffff") , CornerRadii.EMPTY, Insets.EMPTY);
+			Background bgL = new Background(fills);
+			
+			
+			
+			v.setBackground(bgL);
+			
+			vbAdunanza.getChildren().add(v);
+		}
+		
+		return vbAdunanza;
 	}
 
 	private static EventHandler<ActionEvent> getStampa(Stage stage) {
@@ -388,77 +752,7 @@ public class Programmi {
 		return eh;
 	}
 	
-	private static EventHandler<ActionEvent> salvaOfferteMese(Stage newStage, AnchorPane ap, int nummese, Object numanno) {
-		EventHandler<ActionEvent> eh = new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				TextArea of1 = (TextArea)ap.lookup("#offerta1");
-				TextArea of2 = (TextArea)ap.lookup("#offerta2");
-				TextArea of3 = (TextArea)ap.lookup("#offerta3");
-				
-				String txtOf1 = of1.getText();
-				String txtOf2 = of2.getText();
-				String txtOf3 = of3.getText();
-				
-				/* Controllo se esistono già offerte per questo mese e anno */
-				String chk = " select * " + 
-							 " from gp_offertemese om " + 
-							 " where om.anno = "+numanno+" "+
-							 " and om.mese = "+nummese;
-				JSONArray rOff = GePrato.getSelectResponse(chk);
-				if(rOff.length()==0) {
-					String insBase = "INSERT INTO gp_offertemese(mese, anno, descrizione, numero)  "+
-							  " values ("+nummese+", "+numanno+", ";
-					
-					if(txtOf1!=null && !txtOf1.isEmpty()) {
-						String ins1 = insBase+" '"+txtOf1+"',1)";
-						GePrato.getInsertResponse(ins1);
-					}
-					if(txtOf2!=null && !txtOf2.isEmpty()) {
-						String ins2 = insBase+" '"+txtOf2+"',2)";
-						GePrato.getInsertResponse(ins2);
-					}
-					if(txtOf3!=null && !txtOf3.isEmpty()) {
-						String ins3 = insBase+" '"+txtOf3+"',3)";
-						GePrato.getInsertResponse(ins3);
-					}
-					
-					
-				}else {
-					String upBase = "update gp_offertemese "
-							  + " set descrizione = ";
-					String whereBase = " where anno = "+numanno+" "
-							  + " and mese = "+nummese+" "
-							  + " and numero = ";
-					
-					for (int i = 0; i < rOff.length(); i++) {
-						JSONObject obj = rOff.getJSONObject(i);
-						String numero = obj.getString("numero");
-						
-						if(numero.equals("1") && txtOf1!=null && !txtOf1.isEmpty()) {
-							String up1 = upBase+"'"+txtOf1+"' "+whereBase+"1 ";
-							GePrato.getUpdateResponse(up1);
-						}
-						if(numero.equals("2") &&txtOf2!=null && !txtOf2.isEmpty()) {
-							String up2 = upBase+"'"+txtOf2+"' "+whereBase+"2 ";
-							GePrato.getUpdateResponse(up2);
-						}
-						if(numero.equals("3") &&txtOf3!=null && !txtOf3.isEmpty()) {
-							String up3 = upBase+"'"+txtOf3+"' "+whereBase+"3 ";
-							GePrato.getUpdateResponse(up3);
-						}		
-						
-					}
-					
-											
-				}
-				
-				newStage.close();
-			}
-		};
-		return eh;
-	}
+	
 	
 	
 	

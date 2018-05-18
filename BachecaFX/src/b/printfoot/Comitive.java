@@ -19,6 +19,7 @@ public class Comitive {
 	String offertamese2;
 	String offertamese3;
 	String offertamese4;
+	String tiposettimana;
 
 	ComboBox<String> boxConduttore;
 	
@@ -186,6 +187,14 @@ public class Comitive {
 
 	    
 	    return javabeanarray;
+	}
+
+	public String getTiposettimana() {
+		return tiposettimana;
+	}
+
+	public void setTiposettimana(String tiposettimana) {
+		this.tiposettimana = tiposettimana;
 	}
 
 	

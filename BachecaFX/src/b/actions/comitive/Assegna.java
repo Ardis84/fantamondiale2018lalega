@@ -183,7 +183,7 @@ public class Assegna {
 					/* recupero tutti gli anziani e i servitori */
 					String q = 	" SELECT cognome, nome, id FROM gp_proclamatori p " + 
 								" where (p.anziano = 1 or p.sdm=1) " + 
-								" and p.idcongregazione = 1";
+								" order by cognome";//" and p.idcongregazione = 1";
 					JSONArray r = GePrato.getSelectResponse(q);
 					ArrayList<String> cond = new ArrayList<>();
 					for (int k = 0; k < r.length(); k++) {

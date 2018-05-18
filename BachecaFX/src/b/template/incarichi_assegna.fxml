@@ -16,7 +16,7 @@
       <Button id="visualizza" layoutX="384.0" layoutY="36.0" mnemonicParsing="false" text="Visualizza" />
       <VBox id="vbox" layoutX="22.0" layoutY="71.0" prefHeight="570.0" prefWidth="991.0">
          <children>
-            <TableView id="tabellaAssegnazione" prefHeight="570.0" prefWidth="991.0">
+            <TableView id="tabellaIncarichi" prefHeight="570.0" prefWidth="991.0">
             </TableView>
          </children></VBox>
       <Button id="salvaAssegnazioni" disable="true" layoutX="462.0" layoutY="36.0" mnemonicParsing="false" text="Salva Assegnazioni" />

@@ -12,7 +12,7 @@
         <columns>
         </columns>
       </TableView>
-      <Button id="aggiungiComitive" layoutX="404.0" layoutY="31.0" mnemonicParsing="false" text="Aggiungi" />
+      <Button id="add" layoutX="404.0" layoutY="31.0" mnemonicParsing="false" text="Aggiungi" />
       <Button id="mod" disable="true" layoutX="478.0" layoutY="31.0" mnemonicParsing="false" text="Modifica" />
       <Button id="canc" disable="true" layoutX="549.0" layoutY="31.0" mnemonicParsing="false" text="Cancella" />
    </children>

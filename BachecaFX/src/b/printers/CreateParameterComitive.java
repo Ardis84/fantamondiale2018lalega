@@ -20,26 +20,48 @@ public class CreateParameterComitive {
 //		int anno = pp.getJSONObject(0).getInt("anno") ;
 		
 		//offerta1, offerta2, offerta3, ca.data, p.nome, p.cognome, c.luogo, c.giorno
+		String sett = "";
+		int tiposett = 0;
 		for (int i = 0; i < pp.length(); i++) {
 			Comitive cv = new Comitive();
 			JSONObject obj = pp.getJSONObject(i);
 			
-			cv.setOffertamese1(obj.getString("offerta1"));
-			cv.setOffertamese2(obj.getString("offerta2"));
-			cv.setOffertamese3(obj.getString("offerta3"));
+			System.out.println(obj.get("offerta1").toString());
+			
+			if(obj.get("offerta1")!=null && !obj.get("offerta1").toString().equals("null"))
+				cv.setOffertamese1(obj.getString("offerta1"));
+			if(obj.get("offerta2")!=null && !obj.get("offerta2").toString().equals("null"))
+				cv.setOffertamese2(obj.getString("offerta2"));
+			if(obj.get("offerta3")!=null && !obj.get("offerta3").toString().equals("null"))
+				cv.setOffertamese3(obj.getString("offerta3"));
 			
 			cv.setData(obj.getString("data"));
-			cv.setConduttore(obj.getString("nome").substring(0,3)+" "+ obj.getString("cognome"));
+			cv.setConduttore(obj.getString("cognome")+" "+obj.getString("nome").substring(0,3)+". ");
 			cv.setLuogo(obj.getString("luogo"));
-			cv.setGiorno(obj.getString("giorno"));
+			
+			//2018-01-01
+			String dataCom = obj.getString("giorno").substring(0, 3)+" "+obj.getString("data").substring(8, 10);
+			
+			cv.setGiorno(dataCom);
 			cv.setOra(obj.getString("ora"));
 			
 			cv.setAnno(obj.getString("anno"));
-			cv.setMese(obj.getString("mese"));
+			String mese = obj.getString("mese").substring(0, 1).toUpperCase()+""+obj.getString("mese").substring(1, obj.getString("mese").length());
+			cv.setMese(mese);
 			
 			Date date = Utils.reverseStringInDate(obj.getString("data"), "yyyy-MM-dd");
 			String settimana = Utils.getSettimanaFromDateOnlyForMonth(date, obj.getInt("nummese"));
 			cv.setSettimana(settimana);
+			
+			if(!sett.equals(settimana)) {
+				sett = settimana;
+				if(tiposett<3)
+					tiposett++;
+				else
+					tiposett = 1;
+			}
+			
+			cv.setTiposettimana(tiposett+"");
 			
 			c[i] = cv;
 		}

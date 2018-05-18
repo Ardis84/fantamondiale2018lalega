@@ -186,6 +186,12 @@ public class Utils {
 		return gc.get(Calendar.MONTH)+1;
 	}
 	
+	public static int getDayNumberFromDate(Date date) {
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(date);
+		return gc.get(Calendar.DAY_OF_MONTH);
+	}
+	
 	public static int getYearFromDate(Date date) {
 		GregorianCalendar gc = new GregorianCalendar();
 		gc.setTime(date);

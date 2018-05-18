@@ -17,6 +17,7 @@ import b.printers.Printers;
 import b.printfoot.Comitive;
 import b.printfoot.ComitiveElenco;
 import b.printfoot.Proclamatori;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +30,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
@@ -44,6 +46,7 @@ public class Elenco {
 	
 	public static Stage thisStage;
 	
+	@SuppressWarnings("unchecked")
 	public static void view(Stage primaryStage) {
 		thisStage = primaryStage;
 		int c = 0;
@@ -70,6 +73,43 @@ public class Elenco {
 				}
 			};
 			bt.setOnAction(eh);
+				
+			Button mod = (Button)ch.get(3);
+	    	Button del = (Button)ch.get(4);
+	    		    	
+	    	EventHandler<ActionEvent> eh1 = new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					Elenco.ModificaRow(primaryStage);				
+				}
+			};
+			mod.setOnAction(eh1);
+			
+			EventHandler<ActionEvent> eh2 = new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					Elenco.CancellaRow(primaryStage);				
+				}
+			};
+			del.setOnAction(eh2);
+			
+			
+			@SuppressWarnings("rawtypes")
+			ObservableList selectedCells = tb.getSelectionModel().getSelectedCells();
+
+			selectedCells.addListener(new ListChangeListener() {
+			    @Override
+			    public void onChanged(Change c) {
+			    	mod.setDisable(false);
+			    	del.setDisable(false);	    	
+			    	
+//			    	TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+//			        Object val = tablePosition.getTableColumn().getCellData(tablePosition.getRow());
+//			        System.out.println("Selected Value" + val);
+			    }
+			});
 			
 			Scene scene = new Scene(page);
 			primaryStage.setTitle("Bacheca");
@@ -123,13 +163,13 @@ public class Elenco {
 		tb.getColumns().addAll(id,attivo, giorno, luogo, ora);	
 		tb.setEditable(true);		
 
-		ActionsMenus am = new ActionsMenus();
-		am.addAction("Modifica", "b.actions.comitive.Elenco", "ModificaRow");
-		am.addAction("Cancella", "b.actions.comitive.Elenco", "CancellaRow");
-		ArrayList<HashMap<String, String>> actions = am.getActions();
-		final TableView newtb = NodeUtils.addContextMenuToTableView(tb, actions, thisStage);
-		
-		return newtb;
+//		ActionsMenus am = new ActionsMenus();
+//		am.addAction("Modifica", "b.actions.comitive.Elenco", "ModificaRow");
+//		am.addAction("Cancella", "b.actions.comitive.Elenco", "CancellaRow");
+//		ArrayList<HashMap<String, String>> actions = am.getActions();
+//		final TableView newtb = NodeUtils.addContextMenuToTableView(tb, actions, thisStage);
+				
+		return tb;
 	}
 	
 	public static void ModificaRow(Stage stage) {

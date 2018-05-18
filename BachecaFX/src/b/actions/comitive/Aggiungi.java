@@ -48,8 +48,8 @@ public class Aggiungi {
 			Scene scene = new Scene(page);			
 			Stage secondStage = new Stage();
 		
-			MenuBar mb = (MenuBar)page.lookup("#menuPrincipal");
-			MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
+//			MenuBar mb = (MenuBar)page.lookup("#menuPrincipal");
+//			MenuPrincipal mp = new MenuPrincipal(mb, primaryStage);
 			
 			/****/
 			ComboBox sg = (ComboBox) page.lookup("#selGiorno");
