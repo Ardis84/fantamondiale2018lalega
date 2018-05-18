@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vita_cristiana" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="5"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Giorno" class="java.lang.String"/>
+	<field name="NumGiorno" class="java.lang.String"/>
+	<field name="Mese" class="java.lang.String"/>
+	<field name="Anno" class="java.lang.String"/>
+	<field name="PresidenteA" class="java.lang.String"/>
+	<field name="PresidenteB" class="java.lang.String"/>
+	<field name="Lettura" class="java.lang.String"/>
+	<field name="Tesori1" class="java.lang.String"/>
+	<field name="Tesori2" class="java.lang.String"/>
+	<field name="Tesori3A" class="java.lang.String"/>
+	<field name="Tesori3B" class="java.lang.String"/>
+	<field name="Tesori1Tema" class="java.lang.String"/>
+	<field name="Tesori2Tema" class="java.lang.String"/>
+	<field name="Tesori3Tema" class="java.lang.String"/>
+	<field name="PrimoContattoA" class="java.lang.String"/>
+	<field name="PrimoContattoA_Ass" class="java.lang.String"/>
+	<field name="PrimaVisUltA" class="java.lang.String"/>
+	<field name="PrimaVisUltA_Ass" class="java.lang.String"/>
+	<field name="SecVisUltA" class="java.lang.String"/>
+	<field name="SecVisUltA_Ass" class="java.lang.String"/>
+	<field name="TerzVisUltA" class="java.lang.String"/>
+	<field name="TerzVisUltA_Ass" class="java.lang.String"/>
+	<field name="StudioA" class="java.lang.String"/>
+	<field name="StudioA_Ass" class="java.lang.String"/>
+	<field name="DiscorsoA" class="java.lang.String"/>
+	<field name="PrimoContattoB" class="java.lang.String"/>
+	<field name="PrimoContattoB_Ass" class="java.lang.String"/>
+	<field name="PrimaVisUltB" class="java.lang.String"/>
+	<field name="PrimaVisUltB_Ass" class="java.lang.String"/>
+	<field name="SecVisUltB" class="java.lang.String"/>
+	<field name="SecVisUltB_Ass" class="java.lang.String"/>
+	<field name="TerzVisUltB" class="java.lang.String"/>
+	<field name="TerzVisUltB_Ass" class="java.lang.String"/>
+	<field name="StudioB" class="java.lang.String"/>
+	<field name="StudioB_Ass" class="java.lang.String"/>
+	<field name="DiscorsoB" class="java.lang.String"/>
+	<field name="Vita1" class="java.lang.String"/>
+	<field name="Vita2" class="java.lang.String"/>
+	<field name="StudioBiblCongr" class="java.lang.String"/>
+	<field name="StudioBiblCongrLettore" class="java.lang.String"/>
+	<field name="Vita1Tema" class="java.lang.String"/>
+	<field name="Vita2Tema" class="java.lang.String"/>
+	<field name="SBCCapitoli" class="java.lang.String"/>
+	<field name="Cantico1" class="java.lang.String"/>
+	<field name="Cantico2" class="java.lang.String"/>
+	<field name="Cantico3" class="java.lang.String"/>
+	<field name="Preghiera1" class="java.lang.String"/>
+	<field name="Preghiera2" class="java.lang.String"/>
+	<field name="Vita1Min" class="java.lang.String"/>
+	<field name="Vita2Min" class="java.lang.String"/>
+	<field name="SBCMin" class="java.lang.String"/>
+	<field name="Efficaci1Min" class="java.lang.String"/>
+	<field name="Efficaci2Min" class="java.lang.String"/>
+	<field name="Efficaci3Min" class="java.lang.String"/>
+	<variable name="1ContA" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{PrimoContattoA})==false
+&& !$F{PrimoContattoA}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{PrimoContattoA})+" - "+
+    new pij.Utils().getFormattaNome($F{PrimoContattoA_Ass})
+    :
+    $F{PrimoContattoA}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="1ContB" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{PrimoContattoB})==false
+&& !$F{PrimoContattoB}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{PrimoContattoB})+" - "+
+    new pij.Utils().getFormattaNome($F{PrimoContattoB_Ass})
+    :$F{PrimoContattoB}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="PrimaVisUltA" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{PrimaVisUltA})==false
+&& !$F{PrimaVisUltA}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{PrimaVisUltA})+" - "+
+    new pij.Utils().getFormattaNome($F{PrimaVisUltA_Ass})
+    :$F{PrimaVisUltA}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="PrimaVisUltB" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{PrimaVisUltB})==false
+&& !$F{PrimaVisUltB}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{PrimaVisUltB})+" - "+
+    new pij.Utils().getFormattaNome($F{PrimaVisUltB_Ass})
+    :$F{PrimaVisUltB}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="SecVisUltA" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{SecVisUltA})==false
+&& !$F{SecVisUltA}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{SecVisUltA})+" - "+
+    new pij.Utils().getFormattaNome($F{SecVisUltA_Ass})
+    :$F{SecVisUltA}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="SecVisUltB" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{SecVisUltB})==false
+&& !$F{SecVisUltB}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{SecVisUltB})+" - "+
+    new pij.Utils().getFormattaNome($F{SecVisUltB_Ass})
+    :$F{SecVisUltB}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="TerzVisUltA" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{TerzVisUltA})==false
+&& !$F{TerzVisUltA}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{TerzVisUltA})+" - "+
+    new pij.Utils().getFormattaNome($F{TerzVisUltA_Ass})
+    :$F{TerzVisUltA}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="TerzVisUltB" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{TerzVisUltB})==false
+&& !$F{TerzVisUltB}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{TerzVisUltB})+" - "+
+    new pij.Utils().getFormattaNome($F{TerzVisUltB_Ass})
+    :$F{TerzVisUltB}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="StudioA" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{StudioA})==false
+&& !$F{StudioA}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{StudioA})+" - "+
+    new pij.Utils().getFormattaNome($F{StudioA_Ass})
+    :$F{StudioA}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="StudioB" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{StudioB})==false
+&& !$F{StudioB}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{StudioB})+" - "+
+    new pij.Utils().getFormattaNome($F{StudioB_Ass})
+    :$F{StudioB}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="DiscorsoA" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{DiscorsoA})==false
+&& !$F{DiscorsoA}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{DiscorsoA})
+    :$F{DiscorsoA}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="DiscorsoB" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{DiscorsoB})==false
+&& !$F{DiscorsoB}.equals("VIDEO")?
+    new pij.Utils().getFormattaNome($F{DiscorsoB})
+    :$F{DiscorsoB}.equals("VIDEO")?"V":null]]></variableExpression>
+	</variable>
+	<variable name="Eff1" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[$V{1ContA}!=null?
+    "1° Contatto "+($V{1ContA}.equals("V")?"(Video)":""):
+    $V{PrimaVisUltA}!=null?
+        "1° Visita Ulteriore "+($V{PrimaVisUltA}.equals("V")?"(Video)":""):
+        $V{SecVisUltA}!=null?
+             "2° Visita Ulteriore "+($V{SecVisUltA}.equals("V")?"(Video)":""):
+            $V{TerzVisUltA}!=null?
+                "3° Visita Ulteriore "+($V{TerzVisUltA}.equals("V")?"(Video)":""):
+                ""]]></variableExpression>
+	</variable>
+	<variable name="Eff2" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[$V{PrimaVisUltA}!=null && $V{SecVisUltA}==null && $V{TerzVisUltA}==null?
+        "1° Visita Ulteriore "+($V{PrimaVisUltA}.equals("V")?"(Video)":""):
+        $V{SecVisUltA}!=null &&  $V{TerzVisUltA}==null?
+             "2° Visita Ulteriore "+($V{SecVisUltA}.equals("V")?"(Video)":""):
+            $V{TerzVisUltA}!=null?
+                "3° Visita Ulteriore "+($V{TerzVisUltA}.equals("V")?"(Video)":""):
+                ""]]></variableExpression>
+	</variable>
+	<variable name="Eff3" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[$V{StudioA}!=null?
+        "Studio Bibblico "+($V{StudioA}.equals("V")?"(Video)":""):
+        "Discorso "+($V{DiscorsoA}.equals("V")?"(Video)":"")]]></variableExpression>
+	</variable>
+	<variable name="Vita2Tema" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[new pij.Utils().isEmpty($F{Vita2Tema})==false?
+$F{Vita2Tema}:
+"Studio Biblico di Congregazione: "+$F{SBCCapitoli}]]></variableExpression>
+	</variable>
+	<variable name="SalaAParte1" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[$V{1ContA}!=null?
+    ($V{1ContA}.equals("V")?"(Presidente)":$V{1ContA}):
+    $V{PrimaVisUltA}!=null?
+       ( $V{PrimaVisUltA}.equals("V")?"(Presidente)":$V{PrimaVisUltA}):
+        $V{SecVisUltA}!=null?
+           ( $V{SecVisUltA}.equals("V")?"(Presidente)":$V{SecVisUltA}):
+            $V{TerzVisUltA}!=null?
+                ($V{TerzVisUltA}.equals("V")?"(Presidente)":$V{TerzVisUltA}):
+                ""]]></variableExpression>
+	</variable>
+	<variable name="SalaAParte2" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[ $V{PrimaVisUltA}!=null && $V{SecVisUltA}==null && $V{TerzVisUltA}==null?
+       ( $V{PrimaVisUltA}.equals("V")?"(Presidente)":$V{PrimaVisUltA}):
+        $V{SecVisUltA}!=null && $V{TerzVisUltA}==null?
+           ( $V{SecVisUltA}.equals("V")?"(Presidente)":$V{SecVisUltA}):
+            $V{TerzVisUltA}!=null?
+                ($V{TerzVisUltA}.equals("V")?"(Presidente)":$V{TerzVisUltA}):
+                ""]]></variableExpression>
+	</variable>
+	<variable name="SalaBParte1" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[$V{1ContB}!=null?
+    ($V{1ContB}.equals("V")?"(Presidente)":$V{1ContB}):
+    $V{PrimaVisUltB}!=null?
+       ( $V{PrimaVisUltB}.equals("V")?"(Presidente)":$V{PrimaVisUltB}):
+        $V{SecVisUltB}!=null?
+           ( $V{SecVisUltB}.equals("V")?"(Presidente)":$V{SecVisUltB}):
+            $V{TerzVisUltB}!=null?
+                ($V{TerzVisUltB}.equals("V")?"(Presidente)":$V{TerzVisUltB}):
+                ""]]></variableExpression>
+	</variable>
+	<variable name="SalaBParte2" class="java.lang.String" resetType="Group" resetGroup="numgiorno">
+		<variableExpression><![CDATA[$V{PrimaVisUltB}!=null && $V{SecVisUltB}==null && $V{TerzVisUltB}==null?
+       ( $V{PrimaVisUltB}.equals("V")?"(Presidente)":$V{PrimaVisUltB}):
+        $V{SecVisUltB}!=null && $V{TerzVisUltB}==null?
+           ( $V{SecVisUltB}.equals("V")?"(Presidente)":$V{SecVisUltB}):
+            $V{TerzVisUltB}!=null?
+                ($V{TerzVisUltB}.equals("V")?"(Presidente)":$V{TerzVisUltB}):
+                ""
+]]></variableExpression>
+	</variable>
+	<group name="numgiorno">
+		<groupExpression><![CDATA[$F{NumGiorno}]]></groupExpression>
+		<groupHeader>
+			<band height="35">
+				<textField>
+					<reportElement mode="Opaque" x="13" y="10" width="160" height="20" forecolor="#FFFFFF" backcolor="#606970"/>
+					<box leftPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Giorno}+" "+$F{NumGiorno}+" "+$F{Mese}+" "+$F{Anno}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="30" width="555" height="5"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement lineSpacing="Single"/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="267" y="10" width="41" height="20" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Cantico1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="341" y="10" width="106" height="20" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Preghiera iniziale: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="447" y="10" width="108" height="20" forecolor="#454B50"/>
+					<box rightPadding="0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Preghiera1})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="222" y="10" width="45" height="20" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Cantico ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="75">
+				<staticText>
+					<reportElement x="0" y="0" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="15" width="196" height="15" forecolor="#0070C5"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TESORI DELLA PAROLA DI DIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="30" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="30" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["10"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="45" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="45" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["08"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="60" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="60" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["04"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="60" y="45" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Scaviamo per trovare gemme spirituali]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="60" y="60" width="258" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Tesori3Tema}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="30" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Tesori1Tema}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="325" y="30" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Tesori1})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="325" y="45" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Tesori2})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="366" y="60" width="75" height="15" forecolor="#454B50"/>
+					<box rightPadding="5">
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Tesori3A})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="485" y="60" width="70" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Tesori3B})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="318" y="60" width="48" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Sala A:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="440" y="60" width="45" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Sala B:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="0" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["03"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="60" y="0" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Commenti introduttivi]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="325" y="0" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{PresidenteA})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="196" y="15" width="112" height="15" forecolor="#0070C5"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Capitoli Settimanali: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="308" y="15" width="247" height="15" forecolor="#0070C5"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Lettura}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="60">
+				<staticText>
+					<reportElement x="0" y="0" width="196" height="15" forecolor="#967305"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[EFFICACI NEL MINISTERO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="196" y="0" width="145" height="15" forecolor="#967305"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SALA PRINCIPALE]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="485" y="0" width="70" height="15" forecolor="#967305"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PresidenteB}!=null && !$F{PresidenteB}.equals("") && !$F{PresidenteB}.replaceAll( " ", "" ).isEmpty()?
+"("+new pij.Utils().getFormattaNome($F{PresidenteB})+")":""]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="30" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="15" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="45" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="15" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Efficaci1Min}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="29" y="45" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Efficaci3Min}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="29" y="30" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Efficaci2Min}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="341" y="0" width="144" height="15" forecolor="#967305"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CLASSE SUPPLEMENTARE]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="196" y="15" width="145" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{SalaAParte1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="341" y="15" width="214" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{SalaBParte1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="15" width="136" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{Eff1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="30" width="136" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{Eff2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="45" width="136" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{Eff3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="196" y="30" width="145" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{SalaAParte2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="341" y="30" width="214" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{SalaBParte2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="196" y="45" width="145" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{StudioA}!=null?
+    (  $V{StudioA}.equals("V")?"(Presidente)": $V{StudioA}):
+    $V{DiscorsoA}!=null?
+           ($V{DiscorsoA}.equals("V")?"(Presidente)":$V{DiscorsoA}):
+            ""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="341" y="45" width="214" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{StudioB}!=null?
+    (  $V{StudioB}.equals("V")?"(Presidente)": $V{StudioB}):
+    $V{DiscorsoB}!=null?
+           ($V{DiscorsoB}.equals("V")?"(Presidente)":$V{DiscorsoB}):
+            ""]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="30">
+				<staticText>
+					<reportElement x="0" y="0" width="196" height="15" forecolor="#C00000"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VITA CRISTIANA]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="267" y="0" width="41" height="15" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Cantico2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="222" y="0" width="45" height="15" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Cantico ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="15" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="15" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Vita1Min}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="15" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Vita1Tema}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="325" y="15" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Vita1})]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean(!new pij.Utils().isEmpty($F{Vita2Tema}))]]></printWhenExpression>
+				<textField>
+					<reportElement x="29" y="0" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Vita2Min}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="0" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Vita2Tema}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="325" y="0" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Vita2})]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="69">
+				<staticText>
+					<reportElement x="0" y="0" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="0" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{SBCMin}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="325" y="0" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{StudioBiblCongr})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="0" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Studio Biblico di Congregazione :"+$F{SBCCapitoli}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="485" y="15" width="70" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{StudioBiblCongrLettore})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="15" width="485" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Lettore:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="30" width="29" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Min.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="29" y="30" width="31" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["03"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="325" y="30" width="230" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{PresidenteA})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="60" y="30" width="265" height="15" forecolor="#454B50"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dashed" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Ripasso e panoramica del programma della prossima settimana.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="222" y="45" width="45" height="15" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Cantico ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="267" y="45" width="41" height="15" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Cantico3}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="60" width="555" height="5"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement lineSpacing="Single"/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="341" y="45" width="106" height="15" forecolor="#454B50"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Preghiera finale: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="447" y="45" width="108" height="15" forecolor="#454B50"/>
+					<box rightPadding="0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new pij.Utils().getFormattaNome($F{Preghiera2})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="240" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="240"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\simona.parodi.DEDALUS\\git\\Jw\\BachecaFX\\src\\b\\reports\\header_vm.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

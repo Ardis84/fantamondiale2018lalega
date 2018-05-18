@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testimonianza_pubblica" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="19"/>
+	<style name="style1" lineSpacing="Single"/>
+	<subDataset name="dataset1"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Condivisa\\Workspace\\trunk2017\\JWOrganizer\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Data" class="java.lang.String"/>
+	<field name="Mese" class="java.lang.String"/>
+	<field name="Anno" class="java.lang.String"/>
+	<field name="RangeMesi" class="java.lang.String"/>
+	<field name="Congregazione" class="java.lang.String"/>
+	<field name="Nome" class="java.lang.String"/>
+	<field name="Cognome" class="java.lang.String"/>
+	<field name="Tema" class="java.lang.String"/>
+	<field name="Presidente" class="java.lang.String"/>
+	<field name="Lettore" class="java.lang.String"/>
+	<field name="Preghiera Conclusiva" class="java.lang.String"/>
+	<variable name="c_data" class="java.lang.Integer" resetType="Group" resetGroup="anno" calculation="Count">
+		<variableExpression><![CDATA[$F{Data}]]></variableExpression>
+	</variable>
+	<variable name="conta" class="java.lang.String" incrementType="Group" incrementGroup="data">
+		<variableExpression><![CDATA[$V{conta}.equals("1")?"2":
+(
+ $V{conta}.equals("2")?"3":
+     $V{conta}.equals("3")?"1":"1"
+)]]></variableExpression>
+		<initialValueExpression><![CDATA["3"]]></initialValueExpression>
+	</variable>
+	<group name="anno">
+		<groupExpression><![CDATA[$F{Anno}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Mese">
+		<groupExpression><![CDATA[$F{Mese}]]></groupExpression>
+		<groupHeader>
+			<band height="44">
+				<image>
+					<reportElement x="0" y="6" width="535" height="35"/>
+					<imageExpression class="java.lang.String"><![CDATA["bgreylightsfumato.jpg"]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement mode="Transparent" x="0" y="10" width="535" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+					<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tw Cen MT Condensed Extra Bold" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Mese}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="data">
+		<groupExpression><![CDATA[$F{Data}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="66">
+				<printWhenExpression><![CDATA[$V{conta}.equals("1")?true:false]]></printWhenExpression>
+				<textField>
+					<reportElement x="95" y="12" width="202" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Tema}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="10" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="9" y="0" width="128" height="10" forecolor="#FFFFFF" backcolor="#606970"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Data}+" "+$F{Mese}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="12" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Discorso Pubblico"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="297" y="12" width="104" height="15" forecolor="#666666" backcolor="#C18626"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Oratore e Congregazione"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="12" width="127" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Cognome}+" "+
+($F{Nome}!=null && !$F{Nome}.equals("")?
+    $F{Nome}.substring(0,1)+".":"")+
+($F{Congregazione}!=null && !$F{Congregazione}.equals("")?
+" ("+$F{Congregazione}+")":"")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="27" width="202" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Presidente}.equals("NESSUNO")?
+$F{Presidente}.substring(0,($F{Presidente}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="297" y="27" width="104" height="15" forecolor="#666666" backcolor="#C18626"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Lettore TG"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="27" width="127" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Lettore}.equals("NESSUNO")?
+$F{Lettore}.substring(0,($F{Lettore}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="27" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Presidente"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="42" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Preg. Conclusiva *"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="42" width="433" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Preghiera Conclusiva}.equals("NESSUNO")?
+$F{Preghiera Conclusiva}.substring(0,($F{Preghiera Conclusiva}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="60" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="66">
+				<printWhenExpression><![CDATA[$V{conta}.equals("2")?true:false]]></printWhenExpression>
+				<textField>
+					<reportElement mode="Opaque" x="9" y="0" width="128" height="10" forecolor="#FFFFFF" backcolor="#C18626"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Data}+" "+$F{Mese}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="60" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#C18626"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="10" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#C18626"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="43" width="433" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Preghiera Conclusiva}.equals("NESSUNO")?
+$F{Preghiera Conclusiva}.substring(0,($F{Preghiera Conclusiva}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="13" width="202" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Tema}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="28" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Presidente"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="13" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Discorso Pubblico"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="297" y="28" width="104" height="15" forecolor="#666666" backcolor="#C18626"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Lettore TG"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="297" y="13" width="104" height="15" forecolor="#666666" backcolor="#C18626"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Oratore e Congregazione"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="28" width="202" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Presidente}.equals("NESSUNO")?
+$F{Presidente}.substring(0,($F{Presidente}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="43" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Preg. Conclusiva *"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="28" width="127" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Lettore}.equals("NESSUNO")?
+$F{Lettore}.substring(0,($F{Lettore}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="13" width="127" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Cognome}+" "+
+($F{Nome}!=null && !$F{Nome}.equals("")?
+    $F{Nome}.substring(0,1)+".":"")+
+($F{Congregazione}!=null && !$F{Congregazione}.equals("")?
+" ("+$F{Congregazione}+")":"")]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="66">
+				<printWhenExpression><![CDATA[$V{conta}.equals("3")?true:false]]></printWhenExpression>
+				<textField>
+					<reportElement x="0" y="60" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#961526"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="9" y="0" width="128" height="10" forecolor="#FFFFFF" backcolor="#961526"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Data}+" "+$F{Mese}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="10" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#961526"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="43" width="433" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Preghiera Conclusiva}.equals("NESSUNO")?
+$F{Preghiera Conclusiva}.substring(0,($F{Preghiera Conclusiva}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="13" width="202" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Tema}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="28" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Presidente"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="13" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Discorso Pubblico"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="297" y="28" width="104" height="15" forecolor="#666666" backcolor="#C18626"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Lettore TG"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="297" y="13" width="104" height="15" forecolor="#666666" backcolor="#C18626"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Oratore e Congregazione"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="95" y="28" width="202" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Presidente}.equals("NESSUNO")?
+$F{Presidente}.substring(0,($F{Presidente}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="11" y="43" width="84" height="15" forecolor="#666666" backcolor="#961526"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Preg. Conclusiva *"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="28" width="127" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Lettore}.equals("NESSUNO")?
+$F{Lettore}.substring(0,($F{Lettore}.length()-3))+"."
+:"/"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="401" y="13" width="127" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Cognome}+" "+
+($F{Nome}!=null && !$F{Nome}.equals("")?
+    $F{Nome}.substring(0,1)+".":"")+
+($F{Congregazione}!=null && !$F{Congregazione}.equals("")?
+" ("+$F{Congregazione}+")":"")]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="535" height="35"/>
+				<imageExpression class="java.lang.String"><![CDATA["b.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="0" width="535" height="25" forecolor="#FFFFFF"/>
+				<box leftPadding="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Tw Cen MT Condensed Extra Bold" size="17" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Programma Adunanze Pubbliche per i mesi di "+$F{RangeMesi}+" "+$F{Anno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

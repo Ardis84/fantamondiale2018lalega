@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testimonianza_pubblica" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" lineSpacing="Single"/>
+	<subDataset name="dataset1"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Condivisa\\Workspace\\trunk2017\\JWOrganizer\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Data" class="java.lang.String"/>
+	<field name="Mese" class="java.lang.String"/>
+	<field name="Anno" class="java.lang.String"/>
+	<field name="RangeMesi" class="java.lang.String"/>
+	<field name="Usciere Ingresso" class="java.lang.String"/>
+	<field name="Usciere Sala" class="java.lang.String"/>
+	<field name="Microfonista 1" class="java.lang.String"/>
+	<field name="Microfonista 2" class="java.lang.String"/>
+	<field name="Asta 1 Sala" class="java.lang.String"/>
+	<field name="Asta 2 Sala" class="java.lang.String"/>
+	<group name="anno">
+		<groupExpression><![CDATA[$F{Anno}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Mese">
+		<groupExpression><![CDATA[$F{Mese}]]></groupExpression>
+		<groupHeader>
+			<band height="57">
+				<textField>
+					<reportElement x="0" y="52" width="93" height="5"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="37" width="68" height="15" forecolor="#FFFFFF" backcolor="#606970"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Data"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="52" width="102" height="5"/>
+					<box>
+						<pen lineColor="#961526"/>
+						<topPen lineWidth="1.0" lineColor="#961526"/>
+						<leftPen lineColor="#961526"/>
+						<bottomPen lineColor="#961526"/>
+						<rightPen lineColor="#961526"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="108" y="37" width="87" height="15" forecolor="#FFFFFF" backcolor="#961526"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Usc. Ingresso"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="212" y="52" width="102" height="5"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#C18626"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="220" y="37" width="87" height="15" forecolor="#FFFFFF" backcolor="#C18626"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Usc. Sala"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="17" width="535" height="5"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="207" y="8" width="100" height="15" forecolor="#606970" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tw Cen MT Condensed Extra Bold" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Mese}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="441" y="37" width="87" height="15" forecolor="#FFFFFF" backcolor="#C18626"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Asta 1 & Asta 2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="323" y="52" width="102" height="5"/>
+					<box>
+						<pen lineColor="#961526"/>
+						<topPen lineWidth="1.0" lineColor="#961526"/>
+						<leftPen lineColor="#961526"/>
+						<bottomPen lineColor="#961526"/>
+						<rightPen lineColor="#961526"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="331" y="37" width="87" height="15" forecolor="#FFFFFF" backcolor="#961526"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Microfonisti"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="433" y="52" width="102" height="5"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#C18626"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="data">
+		<groupExpression><![CDATA[$F{Data}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="35">
+				<textField>
+					<reportElement x="0" y="0" width="93" height="15" forecolor="#666666"/>
+					<box leftPadding="5">
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Data}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="0" width="102" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Usciere Ingresso}.substring(0, ($F{Usciere Ingresso}.length()-3))+"."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="212" y="0" width="102" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Usciere Sala}.substring(0, ($F{Usciere Sala}.length()-3))+"."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="323" y="0" width="102" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Microfonista 1}.substring(0, ($F{Microfonista 1}.length()-3))+"."
+]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="323" y="17" width="102" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Microfonista 2}.substring(0, ($F{Microfonista 2}.length()-3))+"."
+]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="433" y="0" width="102" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Asta 1 Sala}.substring(0, ($F{Asta 1 Sala}.length()-3))+"."
+]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="433" y="17" width="102" height="15" forecolor="#666666"/>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#CCCCCC"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[!$F{Asta 2 Sala}.equals("NESSUNO")?
+$F{Asta 2 Sala}.substring(0, ($F{Asta 2 Sala}.length()-3))+"."
+:""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="32" width="535" height="3"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#606970"/>
+					</box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</band>
+			<band>
+				<printWhenExpression><![CDATA[$F{Data}.contains("Dom")]]></printWhenExpression>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="535" height="35"/>
+				<imageExpression class="java.lang.String"><![CDATA["b.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="0" width="535" height="24" forecolor="#FFFFFF"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Tw Cen MT Condensed Extra Bold" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Programma Uscieri/Microfonisti/Asta per i mesi di "+$F{RangeMesi}+" "+$F{Anno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

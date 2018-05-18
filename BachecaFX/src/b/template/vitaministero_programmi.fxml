@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include fx:id="menubar" source="menubar.fxml" />
+      <ComboBox id="mese" layoutX="72.0" layoutY="36.0" prefWidth="150.0" />
+      <ComboBox id="anno" layoutX="290.0" layoutY="36.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label layoutX="22.0" layoutY="40.0" prefHeight="17.0" prefWidth="41.0" text="Mese" />
+      <Label layoutX="242.0" layoutY="40.0" prefHeight="17.0" prefWidth="41.0" text="Anno" />
+      <Button id="visualizza" layoutX="384.0" layoutY="36.0" mnemonicParsing="false" text="Visualizza" />
+      <Button id="stampa" disable="true" layoutX="461.0" layoutY="36.0" mnemonicParsing="false" text="Stampa" />
+      <ScrollPane id="scroll" layoutX="22.0" layoutY="77.0" prefHeight="560.0" prefWidth="989.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

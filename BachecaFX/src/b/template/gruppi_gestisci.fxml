@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="b.Controller">
+   <children>
+      <fx:include fx:id="menubar" source="menubar.fxml" />
+      <TableView id="gestisci" layoutY="62.0" prefHeight="590.0" prefWidth="1031.0">
+        <columns>
+        </columns>
+      </TableView>
+      <Button id="stampariepilogo" layoutX="650.0" layoutY="31.0" mnemonicParsing="false" text="Stampa Riepilogo" />
+      <Button id="canc" disable="true" layoutX="558.0" layoutY="31.0" mnemonicParsing="false" text="Cancella" />
+      <Button id="mod" disable="true" layoutX="487.0" layoutY="31.0" mnemonicParsing="false" text="Modifica" />
+      <Button id="aggiungi" layoutX="413.0" layoutY="31.0" mnemonicParsing="false" text="Aggiungi" />
+   </children>
+</AnchorPane>
