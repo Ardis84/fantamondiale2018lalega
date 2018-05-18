@@ -435,6 +435,27 @@ public class ImportaVM {
 							
 						}
 						
+						String vita1 	= mvm.getVITA1();
+						String vita2 	= mvm.getVITA2();
+						String vitaSB 	= mvm.getVITA_SB();
+						
+						String preginiz = mvm.getPREGINIZ();
+						String pregfin 	= mvm.getPREGFIN();
+						String lettore 	= mvm.getLETTORE();
+						
+						if(vita1!=null)
+							System.out.println("Vita1: "+vita1);
+						if(vita2!=null)
+							System.out.println("Vita2: "+vita2);
+						if(vitaSB!=null)
+							System.out.println("VitaSB: "+vitaSB);
+						if(preginiz!=null)
+							System.out.println("Preg. Iniz.: "+preginiz);
+						if(pregfin!=null)
+							System.out.println("Preg. Fin: "+pregfin);
+						if(lettore!=null)
+							System.out.println("Lettore: "+lettore);
+						
 						
 						System.out.println("");
 					}
