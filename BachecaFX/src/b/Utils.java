@@ -16,6 +16,8 @@ import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import b.printfoot.ComitiveElenco;
 import javafx.collections.ObservableList;
@@ -444,7 +446,16 @@ public class Utils {
 		return settimana;
 	}
 
-	
+	 public static  org.jsoup.select.Elements getElementFromUrl(String url, String elmName){
+	        org.jsoup.select.Elements elm = null;
+	        try {
+	            Document doc = Jsoup.connect(url).get();
+	            elm = doc.select(elmName);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return elm;
+	    }
 
 	
 	

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.hssf.util.HSSFColor;
@@ -23,8 +24,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import b.GePrato;
 import b.Utils;
+import b.importazioni.weburl.WebUrl;
+import b.printfoot.VitaMinisteroDett;
 
 public class ImportaVM {
 
@@ -288,15 +294,26 @@ public class ImportaVM {
 			
 			for (int i = 0; i < models.size(); i++) {
 				ModelVM mvm = models.get(i);
+				
+				VitaMinisteroDett vmd = new VitaMinisteroDett();
+				
 				if(mvm.getDATA()!=null) {
 					if(mvm.assemblea) {
 						System.out.println(mvm.getDATA()+" Assemblea");
 					}else {
 						String data 	= mvm.getDATA();
+						vmd.setData(data);
+						/** Recupero i titoli delle parti dal web **/
+						
 						String pres1 	= mvm.getPRESIDENTE1();
 						String tes1 	= mvm.getTESORI1();
 						String tes2 	= mvm.getTESORI2();
 						String tes3a 	= mvm.getTESORI3_A();
+						
+						vmd.setIdpresidente1(getUserId(pres1));
+						vmd.setIdtesori1(getUserId(tes1));
+						vmd.setIdtesori2(getUserId(tes2));
+						vmd.setIdtesori3A(getUserId(tes3a));
 						
 						/** CASISTICHE EFFICACI **/
 						String eff1A = null,eff2A = null,eff3A = null;
@@ -383,6 +400,37 @@ public class ImportaVM {
 						System.out.println("Sala A: "+pres1+" / "+tes1+" / "+tes2+" / "+tes3a+" / "
 								+ labelEff1+": "+eff1A+" / "+labelEff2+": "+ eff2A+" / "+labelEff3+": "+eff3A);
 						
+						vmd.setIdtipoEfficaci1(getIdTipoEfficaci(labelEff1));
+						vmd.setIdtipoEfficaci2(getIdTipoEfficaci(labelEff2));
+						vmd.setIdtipoEfficaci3(getIdTipoEfficaci(labelEff3));
+						
+						if(eff1A!=null) {
+							String[] eff1Ar = eff1A.split(" - ");
+							if(!eff1A.contains("Presidente") && !eff1Ar[0].equals("null")) {
+								vmd.setIdproceff1A(getUserId(eff1Ar[0]));
+								vmd.setIdproceff1A_ass(getUserId(eff1Ar[1]));
+							}
+						}
+						
+						if(eff2A!=null) {
+							String[] eff2Ar = eff2A.split(" - ");
+							if(!eff2A.contains("Presidente")  && !eff2Ar[0].equals("null")) {
+								vmd.setIdproceff2A(getUserId(eff2Ar[0]));
+								vmd.setIdproceff2A_ass(getUserId(eff2Ar[1]));
+							}
+						}
+						
+						if(eff3A!=null) {
+							String[] eff3Ar = eff3A.split(" - ");
+							if(!eff3A.contains("Presidente")  && !eff3Ar[0].equals("null")) {
+								vmd.setIdproceff3A(getUserId(eff3Ar[0]));
+								if(eff3Ar.length>1) {
+									vmd.setIdproceff3A_ass(getUserId(eff3Ar[1]));
+									System.out.println(vmd.getIdproceff3A_ass());
+								}
+							}
+						}
+						
 						/* Se c'è la seconda sala salvo anche i suoi dati */
 						if(!mvm.classesupplsosp) {
 							
@@ -390,6 +438,9 @@ public class ImportaVM {
 							
 							String pres2 = mvm.getPRESIDENTE2();
 							String tes3b 	=mvm.getTESORI3_B();
+							
+							vmd.setIdpresidente2(getUserId(pres2));
+							vmd.setIdtesori3B(getUserId(tes3b));
 							
 							/** 1 **/
 							if(labelEff1.contains("1° Contatto")) {
@@ -433,6 +484,33 @@ public class ImportaVM {
 							System.out.println("Sala B: "+pres2+" / "+tes3b+" / "
 									+ labelEff1+": "+eff1B+" / "+labelEff2+": "+ eff2B+" / "+labelEff3+": "+eff3B);
 							
+							if(eff1B!=null) {
+								String[] eff1Br = eff1B.split(" - ");
+								if(!eff1B.contains("Presidente") && !eff1Br[0].equals("null")) {
+									vmd.setIdproceff1B(getUserId(eff1Br[0]));
+									vmd.setIdproceff1B_ass(getUserId(eff1Br[1]));
+								}
+							}
+							
+							if(eff2B!=null) {
+								String[] eff2Br = eff2B.split(" - ");
+								if(!eff2B.contains("Presidente")  && !eff2Br[0].equals("null")) {
+									vmd.setIdproceff2B(getUserId(eff2Br[0]));
+									vmd.setIdproceff2B_ass(getUserId(eff2Br[1]));
+								}
+							}
+							
+							if(eff3B!=null) {
+								String[] eff3Br = eff3B.split(" - ");
+								if(!eff3B.contains("Presidente")  && !eff3Br[0].equals("null")) {
+									vmd.setIdproceff3B(getUserId(eff3Br[0]));
+									if(eff3Br.length>1) {
+										vmd.setIdproceff3B_ass(getUserId(eff3Br[1]));
+										System.out.println(vmd.getIdproceff3B_ass());
+									}
+								}
+							}
+							
 						}
 						
 						String vita1 	= mvm.getVITA1();
@@ -456,6 +534,17 @@ public class ImportaVM {
 						if(lettore!=null)
 							System.out.println("Lettore: "+lettore);
 						
+						vmd.setIdvita1(getUserId(vita1));
+						vmd.setIdvita2(getUserId(vita2));
+						vmd.setIdvitaStudio(getUserId(vitaSB));
+						
+						vmd.setIdpreghiera1(getUserId(preginiz));
+						vmd.setIdpreghiera2(getUserId(pregfin));
+						vmd.setIdproclettore(getUserId(lettore));
+						
+						vmd = WebUrl.readGuida(data, vmd);
+						
+						importIntoDB(vmd);
 						
 						System.out.println("");
 					}
@@ -484,6 +573,88 @@ public class ImportaVM {
 		
 	}
 
+
+	private static void importIntoDB(VitaMinisteroDett vmd) {
+		//Controllo se esiste già un vm per questo mese
+		String data = vmd.getData();
+		Date date = Utils.reverseStringInDate(data);
+		int mm = Utils.getMonthFromDate(date);
+		String strMM = Utils.getNameMese(mm);
+		int aa = Utils.getYearFromDate(date);
+		String qVm = "SELECT * FROM gp_vitaministero where mese = '"+strMM+"' and anno="+aa+"";
+		JSONArray resVm = GePrato.getSelectResponse(qVm);
+		
+		int idVM = 0;
+		if(resVm.length()<1) {
+			String insVm = "insert into gp_vitaministero(mese,anno) values('"+strMM+"',"+aa+")";
+			GePrato.getInsertResponse(insVm);
+			resVm = GePrato.getSelectResponse(qVm);
+		}
+		
+		idVM = resVm.getJSONObject(0).getInt("id");
+		System.out.println(idVM);
+		
+	}
+
+	private static int getIdTipoEfficaci(String label) {
+		int id=0;
+		String code = "";
+		
+		if(label.contains("1° Contatto"))
+			code = "PC";
+		else if(label.contains("1° Vis. Ulteriore"))
+			code = "PVU";
+		else if(label.contains("2° Vis. Ulteriore"))
+			code = "SVU";
+		else if(label.contains("3° Vis. Ulteriore"))
+			code = "TVU";
+		else if(label.contains("2° Vis. Ulteriore"))
+			code = "SVU";
+		else if(label.contains("Studio Bibblico"))
+			code = "SB";
+		else
+			code = "D";
+		
+		JSONArray res = GePrato.getSelectResponse("select * from gp_efficacitipi where cod='"+code+"'");
+		if(res.length()>0) {
+			id = res.getJSONObject(0).getInt("id");
+		}
+		
+		return id;
+	}
+
+	private static int getUserId(String procl) {		
+		int id = 0;
+		String cogn ="", iniznome = "";
+		
+		if(procl!=null && !procl.isEmpty() && !procl.contains("Presidente")) {
+			String[] elProc = procl.split(" ");
+			for (int i = 0; i < elProc.length-1; i++) {
+				cogn += elProc[i]+" ";
+			}
+			
+			cogn = cogn.trim();
+			
+			iniznome = elProc[elProc.length-1].replaceAll("\\.", "").trim();
+			
+			cogn = cogn.replace("'", "");
+					
+			JSONArray res = GePrato.getSelectResponse("select id, cognome, nome from gp_proclamatori p where lower(cognome) like '%"+cogn+"%'");
+			for (int i = 0; i < res.length(); i++) {
+				JSONObject obj = res.getJSONObject(i);
+				String nome = obj.getString("nome");
+			
+				if(nome.substring(0, iniznome.length()).equals(iniznome)) {
+					id = obj.getInt("id");
+					System.out.println(id);
+					i = res.length();
+				}
+			}
+		}
+		return id;
+	}
+
+	
 }
 
 class ModelVM {
