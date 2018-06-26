@@ -22,6 +22,12 @@ $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
 
+
+$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+$txt = $chatId."\n";
+fwrite($myfile, $txt);
+fclose($myfile);
+
 header("Content-Type: application/json");
 $response = '';
 /*if(strpos($text, "/start") === 0 || $text=="ciao")
